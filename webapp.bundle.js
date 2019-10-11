@@ -1,17 +1,17 @@
 (function () {
             'use strict';
 
-            // function __$styleInject(css) {
-            //     if (!css) return;
+            function __$styleInject(css) {
+                if (!css) return;
 
-            //     if (typeof window == 'undefined') return;
-            //     var style = document.createElement('style');
-            //     style.setAttribute('media', 'screen');
+                if (typeof window == 'undefined') return;
+                var style = document.createElement('style');
+                style.setAttribute('media', 'screen');
 
-            //     style.innerHTML = css;
-            //     document.head.appendChild(style);
-            //     return css;
-            // }
+                // style.innerHTML = css;
+                document.head.appendChild(style);
+                return css;
+            }
 
             var global$1 = (typeof global !== "undefined" ? global :
                         typeof self !== "undefined" ? self :
@@ -7660,12 +7660,12 @@
               log('Pedometer:', JSON.stringify(ped));
               alert(JSON.stringify(ped))
 
-              log('Notifications demo...');
-              await miband.showNotification('message');
-              await delay(3000);
-              await miband.showNotification('phone');
-              await delay(5000);
-              await miband.showNotification('off');
+              // log('Notifications demo...');
+              // await miband.showNotification('message');
+              // await delay(3000);
+              // await miband.showNotification('phone');
+              // await delay(5000);
+              // await miband.showNotification('off');
 
               log('Tap MiBand button, quick!');
               miband.on('button', () => log('Tap detected'));
@@ -7683,8 +7683,7 @@
                 log('Heart Rate:', rate);
               });
               // await miband.hrmStart();
-
-              // await delay(10000);
+              // await delay(30000);
               // await miband.hrmStop();
 
               //log('RAW data (no decoding)...')
