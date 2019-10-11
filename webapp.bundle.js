@@ -1,17 +1,17 @@
 (function () {
             'use strict';
 
-            function __$styleInject(css) {
-                if (!css) return;
+            // function __$styleInject(css) {
+            //     if (!css) return;
 
-                if (typeof window == 'undefined') return;
-                var style = document.createElement('style');
-                style.setAttribute('media', 'screen');
+            //     if (typeof window == 'undefined') return;
+            //     var style = document.createElement('style');
+            //     style.setAttribute('media', 'screen');
 
-                style.innerHTML = css;
-                document.head.appendChild(style);
-                return css;
-            }
+            //     style.innerHTML = css;
+            //     document.head.appendChild(style);
+            //     return css;
+            // }
 
             var global$1 = (typeof global !== "undefined" ? global :
                         typeof self !== "undefined" ? self :
