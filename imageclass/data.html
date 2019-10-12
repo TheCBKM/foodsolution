@@ -1,2140 +1,2149 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="../storage.js"></script>
 
     <title>data</title>
-  </head>
-  <body>
-        <div class="p-3 mb-2 bg-danger text-white"  style="text-align: center;">Select the food which is likely to be: </div>
+</head>
+
+<body>
+    <div class="p-3 mb-2 bg-danger text-white" style="text-align: center;">Select the food which is likely to be: </div>
     <ul class="list-group mb-2" id="abc">
-        
-      </ul>
-      <center>
-      <button type="button" onclick="estimateCalo(1)" class="btn btn-outline-success">Yes</button>
-      <button type="button" onclick="estimateCalo(2)" class="btn btn-outline-success">No</button>
+    </ul>
+    <center>
+        <button type="button" onclick="estimateCalo(1)" class="btn btn-outline-success">Yes</button>
+        <button type="button" onclick="estimateCalo(2)" class="btn btn-outline-success">No</button>
     </center>
-      <!-- Optional JavaScript -->
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script>
         user = getStorage('user');
         purani = '';
         updhumandata = '';
-        axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/gettoday',{
-            user:user._id
+        axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/gettoday', {
+            user: user._id
         })
-        .then(res=>{
-            length = res.data.event.length
-            
-            updhumandata = res.data.event[length-1].humandata;
-            purani = updhumandata.calories;
-            console.log(purani)
-        })
-        .catch(e=>{
-            console.log(e)
-        })
+            .then(res => {
+                length = res.data.event.length
+
+                updhumandata = res.data.event[length - 1].humandata;
+                purani = updhumandata.calories;
+                console.log(purani)
+            })
+            .catch(e => {
+                console.log(e)
+            })
 
         var cpd = getStorage('cpd');
         var humandata = getStorage('humandata');
         var burn = humandata.calories - purani;
         var tbtcalorie;
-        function estimateCalo(x){
+        function estimateCalo(x) {
             alert(x);
-            if(x==1){
+            if (x == 1) {
                 cpd = cpd + burn - Number(tbtcalorie.split(' ')[0]);
-               
-            }else{
+
+            } else {
                 cpd = cpd + burn;
-               
-            }
-        
-         if(cpd>0){
-             
-         
-            axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/set',{
-                user : user._id,
-                humandata : humandata,
-                caltaken : cpd
-            })
-            .then(res=>{
-                console.log(res)
-            })
-        }
-        else{
-            alert("This food seems to be un healthy do not eat it ")
-        }
-    }
 
-        function vanishColor(){
+            }
+
+            if (cpd > 0) {
+
+
+                axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/set', {
+                    user: user._id,
+                    humandata: humandata,
+                    caltaken: cpd
+                })
+                    .then(res => {
+                        console.log(res)
+                    })
+            }
+            else {
+                alert("This food seems to be un healthy do not eat it ")
+            }
+        }
+
+        function vanishColor() {
             var a = 'a';
-            for(i=0; i<count ; i++){
-            document.getElementById(a).style.backgroundColor = 'white';
-            a = a + 'a';
+            for (i = 0; i < count; i++) {
+                document.getElementById(a).style.backgroundColor = 'white';
+                a = a + 'a';
             }
         }
 
-        function takeCalorie(x,y){
+        function takeCalorie(x, y) {
             vanishColor();
             document.getElementById(y).style.backgroundColor = 'green';
             tbtcalorie = x;
-            
+
         }
     </script>
     <script>
-        data= [
-                {
-                    food: "Acai",
-                    cal: "20 cal"
-                },
-                {
-                    food: "Apple",
-                    cal: "95 cal"
-                },
-                {
-                    food: "Applesauce",
-                    cal: "167 cal"
-                },
-                {
-                    food: "Apricot",
-                    cal: "17 cal"
-                },
-                {
-                    food: "Avocado",
-                    cal: "320 cal"
-                },
-                {
-                    food: "Banana",
-                    cal: "111 cal"
-                },
-                {
-                    food: "Blackberries",
-                    cal: "62 cal"
-                },
-                {
-                    food: "Blood Oranges",
-                    cal: "70 cal"
-                },
-                {
-                    food: "Blueberries",
-                    cal: "84 cal"
-                },
-                {
-                    food: "Cantaloupe",
-                    cal: "23 cal"
-                },
-                {
-                    food: "Cherries",
-                    cal: "4 cal"
-                },
-                {
-                    food: "Clementine",
-                    cal: "35 cal"
-                },
-                {
-                    food: "Cranberries",
-                    cal: "46 cal"
-                },
-                {
-                    food: "Currants",
-                    cal: "63 cal"
-                },
-                {
-                    food: "Custard Apple",
-                    cal: "136 cal"
-                },
-                {
-                    food: "Dates",
-                    cal: "20 cal"
-                },
-                {
-                    food: "Figs",
-                    cal: "37 cal"
-                },
-                {
-                    food: "Fruit salad",
-                    cal: "125 cal"
-                },
-                {
-                    food: "Grapes",
-                    cal: "104 cal"
-                },
-                {
-                    food: "Greengage",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Guava",
-                    cal: "37 cal"
-                },
-                {
-                    food: "Jackfruit",
-                    cal: "143 cal"
-                },
-                {
-                    food: "Jujube",
-                    cal: "22 cal"
-                },
-                {
-                    food: "Kiwi",
-                    cal: "112 cal"
-                },
-                {
-                    food: "Lemon",
-                    cal: "17 cal"
-                },
-                {
-                    food: "Lime",
-                    cal: "20 cal"
-                },
-                {
-                    food: "Lychees",
-                    cal: "7 cal"
-                },
-                {
-                    food: "Mandarin Oranges",
-                    cal: "47 cal"
-                },
-                {
-                    food: "Mango",
-                    cal: "202 cal"
-                },
-                {
-                    food: "Minneola",
-                    cal: "70 cal"
-                },
-                {
-                    food: "Mulberries",
-                    cal: "60 cal"
-                },
-                {
-                    food: "Nectarine",
-                    cal: "66 cal"
-                },
-                {
-                    food: "Olives",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Orange",
-                    cal: "62 cal"
-                },
-                {
-                    food: "Papaya",
-                    cal: "215 cal"
-                },
-                {
-                    food: "Passion Fruit",
-                    cal: "17 cal"
-                },
-                {
-                    food: "Peach",
-                    cal: "59 cal"
-                },
-                {
-                    food: "Pear",
-                    cal: "101 cal"
-                },
-                {
-                    food: "Persimmon",
-                    cal: "32 cal"
-                },
-                {
-                    food: "Physalis",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Pineapple",
-                    cal: "453 cal"
-                },
-                {
-                    food: "Plantains",
-                    cal: "218 cal"
-                },
-                {
-                    food: "Plum",
-                    cal: "30 cal"
-                },
-                {
-                    food: "Pomegranate",
-                    cal: "234 cal"
-                },
-                {
-                    food: "Quince",
-                    cal: "52 cal"
-                },
-                {
-                    food: "Raisins",
-                    cal: "434 cal"
-                },
-                {
-                    food: "Rambutan",
-                    cal: "7 cal"
-                },
-                {
-                    food: "Raspberries",
-                    cal: "64 cal"
-                },
-                {
-                    food: "Rhubarb",
-                    cal: "11 cal"
-                },
-                {
-                    food: "Starfruit",
-                    cal: "28 cal"
-                },
-                {
-                    food: "Strawberries",
-                    cal: "49 cal"
-                },
-                {
-                    food: "Tamarind",
-                    cal: "5 cal"
-                },
-                {
-                    food: "Tangerine",
-                    cal: "47 cal"
-                },
-                {
-                    food: "Watermelon",
-                    cal: "86 cal"
-                },
-                {
-                    food: "Artichoke",
-                    cal: "60 cal"
-                },
-                {
-                    food: "Arugula",
-                    cal: "1 cal"
-                },
-                {
-                    food: "Asparagus",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Aubergine",
-                    cal: "115 cal"
-                },
-                {
-                    food: "Beetroot",
-                    cal: "35 cal"
-                },
-                {
-                    food: "Bell Pepper",
-                    cal: "15 cal"
-                },
-                {
-                    food: "Black Olives",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Broccoli",
-                    cal: "207 cal"
-                },
-                {
-                    food: "Brussels Sprouts",
-                    cal: "8 cal"
-                },
-                {
-                    food: "Cabbage",
-                    cal: "227 cal"
-                },
-                {
-                    food: "Capsicum",
-                    cal: "12 cal"
-                },
-                {
-                    food: "Carrot",
-                    cal: "25 cal"
-                },
-                {
-                    food: "Cauliflower",
-                    cal: "3 cal"
-                },
-                {
-                    food: "Celery",
-                    cal: "6 cal"
-                },
-                {
-                    food: "Chard",
-                    cal: "9 cal"
-                },
-                {
-                    food: "Cherry Tomato",
-                    cal: "20 cal"
-                },
-                {
-                    food: "Chicory",
-                    cal: "38 cal"
-                },
-                {
-                    food: "Chinese Cabbage",
-                    cal: "134 cal"
-                },
-                {
-                    food: "Chives",
-                    cal: "1 cal"
-                },
-                {
-                    food: "Collard Greens",
-                    cal: "12 cal"
-                },
-                {
-                    food: "Corn",
-                    cal: "562 cal"
-                },
-                {
-                    food: "Courgette",
-                    cal: "33 cal"
-                },
-                {
-                    food: "Creamed Spinach",
-                    cal: "148 cal"
-                },
-                {
-                    food: "Cucumber",
-                    cal: "66 cal"
-                },
-                {
-                    food: "Eggplant",
-                    cal: "115 cal"
-                },
-                {
-                    food: "Endive",
-                    cal: "87 cal"
-                },
-                {
-                    food: "Fennel",
-                    cal: "73 cal"
-                },
-                {
-                    food: "Garlic",
-                    cal: "4 cal"
-                },
-                {
-                    food: "Gherkin",
-                    cal: "9 cal"
-                },
-                {
-                    food: "Gourd",
-                    cal: "108 cal"
-                },
-                {
-                    food: "Green Beans",
-                    cal: "34 cal"
-                },
-                {
-                    food: "Green Olives",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Green Onion",
-                    cal: "5 cal"
-                },
-                {
-                    food: "Horseradish",
-                    cal: "7 cal"
-                },
-                {
-                    food: "Kale",
-                    cal: "33 cal"
-                },
-                {
-                    food: "Kohlrabi",
-                    cal: "108 cal"
-                },
-                {
-                    food: "Kumara",
-                    cal: "112 cal"
-                },
-                {
-                    food: "Leek",
-                    cal: "54 cal"
-                },
-                {
-                    food: "Lettuce",
-                    cal: "90 cal"
-                },
-                {
-                    food: "Mushrooms",
-                    cal: "1 cal"
-                },
-                {
-                    food: "Mustard Greens",
-                    cal: "15 cal"
-                },
-                {
-                    food: "Nori",
-                    cal: "1 cal"
-                },
-                {
-                    food: "Okra",
-                    cal: "4 cal"
-                },
-                {
-                    food: "Olives",
-                    cal: "2 cal"
-                },
-                {
-                    food: "Onion",
-                    cal: "34 cal"
-                },
-                {
-                    food: "Parsnips",
-                    cal: "128 cal"
-                },
-                {
-                    food: "Peas",
-                    cal: "79 cal"
-                },
-                {
-                    food: "Pepper",
-                    cal: "20 cal"
-                },
-                {
-                    food: "Potato",
-                    cal: "164 cal"
-                },
-                {
-                    food: "Pumpkin",
-                    cal: "51 cal"
-                },
-                {
-                    food: "Radishes",
-                    cal: "1 cal"
-                },
-                {
-                    food: "Red Cabbage",
-                    cal: "7 cal"
-                },
-                {
-                    food: "Rutabaga",
-                    cal: "147 cal"
-                },
-                {
-                    food: "Shallots",
-                    cal: "18 cal"
-                },
-                {
-                    food: "Spinach",
-                    cal: "78 cal"
-                },
-                {
-                    food: "Squash",
-                    cal: "88 cal"
-                },
-                {
-                    food: "Sweet Potato",
-                    cal: "112 cal"
-                },
-                {
-                    food: "Tomato",
-                    cal: "20 cal"
-                },
-                {
-                    food: "Turnip Greens",
-                    cal: "34 cal"
-                },
-                {
-                    food: "Turnips",
-                    cal: "34 cal"
-                },
-                {
-                    food: "Wasabi",
-                    cal: "184 cal"
-                },
-                {
-                    food: "Winter Squash",
-                    cal: "147 cal"
-                },
-                {
-                    food: "Zucchini",
-                    cal: "3cal"
-                },
-                {
-                    food: "Arby’s Grand Turkey Club",
-                    cal: "489 cal"
-                },
-                {
-                    food: "Arby’s Reuben",
-                    cal: "641 cal"
-                },
-                {
-                    food: "Arby’s Roast Beef Classic",
-                    cal: "360 cal"
-                },
-                {
-                    food: "Arby’s Roast Beef Max",
-                    cal: "360 cal"
-                },
-                {
-                    food: "BBQ Rib",
-                    cal: "142 cal"
-                },
-                {
-                    food: "Bean Burrito",
-                    cal: "380 cal"
-                },
-                {
-                    food: "Big N’ Tasty",
-                    cal: "517 cal"
-                },
-                {
-                    food: "Bratwurst",
-                    cal: "283 cal"
-                },
-                {
-                    food: "Burger King Angry Whopper",
-                    cal: "740 cal"
-                },
-                {
-                    food: "Burger King Double Whopper",
-                    cal: "894 cal"
-                },
-                {
-                    food: "Burger King Double Whopper with Cheese",
-                    cal: "994 cal"
-                },
-                {
-                    food: "Burger King Original Chicken Sandwich",
-                    cal: "659 cal"
-                },
-                {
-                    food: "Burger King Premium Alaskan Fish Sandwich",
-                    cal: "591 cal"
-                },
-                {
-                    food: "Burger King Triple Whopper",
-                    cal: "1471 cal"
-                },
-                {
-                    food: "Burger King Whopper",
-                    cal: "672 cal"
-                },
-                {
-                    food: "Burger King Whopper Jr.",
-                    cal: "346 cal"
-                },
-                {
-                    food: "Burger King Whopper with Cheese",
-                    cal: "759 cal"
-                },
-                {
-                    food: "Cheeseburger",
-                    cal: "410 cal"
-                },
-                {
-                    food: "Chicken Breast",
-                    cal: "116 cal"
-                },
-                {
-                    food: "Chicken Fajita",
-                    cal: "326 cal"
-                },
-                {
-                    food: "Chicken McNuggets",
-                    cal: "48 cal"
-                },
-                {
-                    food: "Chicken Nuggets",
-                    cal: "59 cal"
-                },
-                {
-                    food: "Chicken Pizziola",
-                    cal: "451 cal"
-                },
-                {
-                    food: "Chicken Sandwich",
-                    cal: "410 cal"
-                },
-                {
-                    food: "Chicken Teriyaki Sandwich",
-                    cal: "367 cal"
-                },
-                {
-                    food: "Chicken Wings",
-                    cal: "94 cal"
-                },
-                {
-                    food: "Chop Suey",
-                    cal: "585 cal"
-                },
-                {
-                    food: "Curly Fries",
-                    cal: "398 cal"
-                },
-                {
-                    food: "Double Cheeseburger",
-                    cal: "414 cal"
-                },
-                {
-                    food: "Egg Roll",
-                    cal: "200 cal"
-                },
-                {
-                    food: "Falafel",
-                    cal: "57 cal"
-                },
-                {
-                    food: "Filet-o-Fish",
-                    cal: "400 cal"
-                },
-                {
-                    food: "Fish and Chips",
-                    cal: "585 cal"
-                },
-                {
-                    food: "Fish Sandwich",
-                    cal: "431 cal"
-                },
-                {
-                    food: "French Fries",
-                    cal: "222 cal"
-                },
-                {
-                    food: "Grilled Chicken Salad",
-                    cal: "268 cal"
-                },
-                {
-                    food: "Ham Sandwich",
-                    cal: "352 cal"
-                },
-                {
-                    food: "Hamburger",
-                    cal: "279 cal"
-                },
-                {
-                    food: "Hot Dog",
-                    cal: "312 cal"
-                },
-                {
-                    food: "Italian BMT",
-                    cal: "410 cal"
-                },
-                {
-                    food: "Lasagna",
-                    cal: "172 cal"
-                },
-                {
-                    food: "McDonald’s Big Mac",
-                    cal: "561 cal"
-                },
-                {
-                    food: "McDonald’s Cheeseburger",
-                    cal: "300 cal"
-                },
-                {
-                    food: "McDonald’s Chicken Nuggets",
-                    cal: "48 cal"
-                },
-                {
-                    food: "McDonald’s Double Cheeseburger",
-                    cal: "437 cal"
-                },
-                {
-                    food: "McDonald’s Filet-o-Fish",
-                    cal: "391 cal"
-                },
-                {
-                    food: "McDonald’s McChicken",
-                    cal: "359 cal"
-                },
-                {
-                    food: "McDonald’s McDouble",
-                    cal: "403 cal"
-                },
-                {
-                    food: "McDonald’s McMuffi Egg",
-                    cal: "290 cal"
-                },
-                {
-                    food: "McDonald’s McRib",
-                    cal: "451 cal"
-                },
-                {
-                    food: "McDonald’s Mighty Wings",
-                    cal: "95 cal"
-                },
-                {
-                    food: "McRib",
-                    cal: "451 cal"
-                },
-                {
-                    food: "Meatball Sandwich",
-                    cal: "481 cal"
-                },
-                {
-                    food: "Nachos with Cheese",
-                    cal: "575 cal"
-                },
-                {
-                    food: "Onion Rings",
-                    cal: "25 cal"
-                },
-                {
-                    food: "Poutine",
-                    cal: "511 cal"
-                },
-                {
-                    food: "Smoked Salmon",
-                    cal: "44 cal"
-                },
-                {
-                    food: "Spicy Italian",
-                    cal: "480 cal"
-                },
-                {
-                    food: "Subway Club Sandwich",
-                    cal: "312 cal"
-                },
-                {
-                    food: "Tortilla Wrap",
-                    cal: "171 cal"
-                },
-                {
-                    food: "Tuna",
-                    cal: "24 cal"
-                },
-                {
-                    food: "Turkey",
-                    cal: "29 cal"
-                },
-                {
-                    food: "Veggie Burger",
-                    cal: "389 cal"
-                },
-                {
-                    food: "Veggie Delight",
-                    cal: "229 cal"
-                },
-                {
-                    food: "Veggie Patty",
-                    cal: "963 cal"
-                },
-                {
-                    food: "Wendy’s Baconator",
-                    cal: "839 cal"
-                },
-                {
-                    food: "Wendy’s Jr. Bacon Cheeseburger",
-                    cal: "420 cal"
-                },
-                {
-                    food: "Wendy’s Jr. Cheeseburger",
-                    cal: "290 cal"
-                },
-                {
-                    food: "Wendy’s Son of Baconator",
-                    cal: "700 cal"
-                },
-                {
-                    food: "Whopper",
-                    cal: "672 cal"
-                },
-                {
-                    food: "Zinger",
-                    cal: "517 cal"
-                },
-                {
-                    food: "Zinger Burger",
-                    cal: "517 cal"
-                },
-                {
-                    food: "BBQ Chicken Pizza",
-                    cal: "309 cal"
-                },
-                {
-                    food: "BBQ Pizza",
-                    cal: "314 cal"
-                },
-                {
-                    food: "Beef Pizza",
-                    cal: "714 cal"
-                },
-                {
-                    food: "Bianca Pizza",
-                    cal: "460 cal"
-                },
-                {
-                    food: "Buffalo Chicken Pizza",
-                    cal: "600 cal"
-                },
-                {
-                    food: "Calabrese Pizza",
-                    cal: "254 cal"
-                },
-                {
-                    food: "Calzone",
-                    cal: "841 cal"
-                },
-                {
-                    food: "Capricciosa Pizza",
-                    cal: "192 cal"
-                },
-                {
-                    food: "Cheese Pizza",
-                    cal: "168 cal"
-                },
-                {
-                    food: "Chicken Pizza",
-                    cal: "309 cal"
-                },
-                {
-                    food: "Deep Dish Pizza",
-                    cal: "313 cal"
-                },
-                {
-                    food: "Dominos Philly Cheese Steak Pizza",
-                    cal: "356 cal"
-                },
-                {
-                    food: "Four Cheese Pizza",
-                    cal: "250 cal"
-                },
-                {
-                    food: "Goat Cheese Pizza",
-                    cal: "138 cal"
-                },
-                {
-                    food: "Grilled Pizza",
-                    cal: "280 cal"
-                },
-                {
-                    food: "Hawaiian Pizza",
-                    cal: "154 cal"
-                },
-                {
-                    food: "Margherita Pizza",
-                    cal: "173 cal"
-                },
-                {
-                    food: "Mozzarella Pizza",
-                    cal: "154 cal"
-                },
-                {
-                    food: "Mushroom Pizza",
-                    cal: "611 cal"
-                },
-                {
-                    food: "Napoli Pizza",
-                    cal: "248 cal"
-                },
-                {
-                    food: "New York Style Pizza",
-                    cal: "174 cal"
-                },
-                {
-                    food: "Pepperoni Pizza",
-                    cal: "181 cal"
-                },
-                {
-                    food: "Pizza Dough",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Pizza Hut Stuffed Crust Pizza",
-                    cal: "380 cal"
-                },
-                {
-                    food: "Pizza Hut Supreme Pizza",
-                    cal: "305 cal"
-                },
-                {
-                    food: "Pizza Rolls",
-                    cal: "35 cal"
-                },
-                {
-                    food: "Quattro Formaggi Pizza",
-                    cal: "330 cal"
-                },
-                {
-                    food: "Red Pepper Pizza",
-                    cal: "165 cal"
-                },
-                {
-                    food: "Salami Pizza",
-                    cal: "181 cal"
-                },
-                {
-                    food: "Sausage Pizza",
-                    cal: "177 cal"
-                },
-                {
-                    food: "Seafood Pizza",
-                    cal: "186 cal"
-                },
-                {
-                    food: "Shrimp Pizza",
-                    cal: "190 cal"
-                },
-                {
-                    food: "Sicilian Pizza",
-                    cal: "321 cal"
-                },
-                {
-                    food: "Spinach Feta Pizza",
-                    cal: "150 cal"
-                },
-                {
-                    food: "Spinach Pizza",
-                    cal: "145 cal"
-                },
-                {
-                    food: "Stuffed Crust Pizza",
-                    cal: "380 cal"
-                },
-                {
-                    food: "Tarte Flambée",
-                    cal: "142 cal"
-                },
-                {
-                    food: "Thin Crust Pizza",
-                    cal: "157 cal"
-                },
-                {
-                    food: "Tuna Pizza",
-                    cal: "318 cal"
-                },
-                {
-                    food: "Vegetable Pizza",
-                    cal: "399 cal"
-                },
-                {
-                    food: "Vegetarian Pizza",
-                    cal: "399 cal"
-                },
-                {
-                    food: "Veggie Pizza",
-                    cal: "263 cal"
-                },
-                {
-                    food: "White Pizza",
-                    cal: "571 ca"
-                },
-                {
-                    food: "American Cheese",
-                    cal: "31 cal"
-                },
-                {
-                    food: "Applewood",
-                    cal: "82 cal"
-                },
-                {
-                    food: "Asiago Cheese",
-                    cal: "110 cal"
-                },
-                {
-                    food: "Babybel",
-                    cal: "70 cal"
-                },
-                {
-                    food: "Blue Cheese",
-                    cal: "99 cal"
-                },
-                {
-                    food: "Brie",
-                    cal: "100 cal"
-                },
-                {
-                    food: "Camembert",
-                    cal: "90 cal"
-                },
-                {
-                    food: "Cheddar",
-                    cal: "89 cal"
-                },
-                {
-                    food: "Cheese Fondue",
-                    cal: "912 cal"
-                },
-                {
-                    food: "Cheese Spread",
-                    cal: "44 cal"
-                },
-                {
-                    food: "Cheese Whiz",
-                    cal: "91 cal"
-                },
-                {
-                    food: "Chester",
-                    cal: "108 cal"
-                },
-                {
-                    food: "Colby Cheese",
-                    cal: "520 cal"
-                },
-                {
-                    food: "Colby-Jack Cheese",
-                    cal: "520 cal"
-                },
-                {
-                    food: "Cottage Cheese",
-                    cal: "206 cal"
-                },
-                {
-                    food: "Dutch Cheese",
-                    cal: "110 cal"
-                },
-                {
-                    food: "Edam Cheese",
-                    cal: "707 cal"
-                },
-                {
-                    food: "Emmentaler",
-                    cal: "89 cal"
-                },
-                {
-                    food: "Feta",
-                    cal: "74 cal"
-                },
-                {
-                    food: "Fontina",
-                    cal: "117 cal"
-                },
-                {
-                    food: "Fresh Mozzarella",
-                    cal: "78 cal"
-                },
-                {
-                    food: "Gjetost",
-                    cal: "1058 cal"
-                },
-                {
-                    food: "Goat Cheese",
-                    cal: "102 cal"
-                },
-                {
-                    food: "Gorgonzola",
-                    cal: "98 cal"
-                },
-                {
-                    food: "Gouda",
-                    cal: "705 cal"
-                },
-                {
-                    food: "Grated Parmesan",
-                    cal: "22 cal"
-                },
-                {
-                    food: "Grilled Cheese",
-                    cal: "291 cal"
-                },
-                {
-                    food: "Gruyere",
-                    cal: "103 cal"
-                },
-                {
-                    food: "Halloumi",
-                    cal: "90 cal"
-                },
-                {
-                    food: "Havarti",
-                    cal: "104 cal"
-                },
-                {
-                    food: "Italian Cheese",
-                    cal: "119 cal"
-                },
-                {
-                    food: "Jarlsberg",
-                    cal: "99 cal"
-                },
-                {
-                    food: "Maasdam Cheese",
-                    cal: "62 cal"
-                },
-                {
-                    food: "Manchego Cheese",
-                    cal: "90 cal"
-                },
-                {
-                    food: "Monterey",
-                    cal: "492 cal"
-                },
-                {
-                    food: "Monterey Jack Cheese",
-                    cal: "492 cal"
-                },
-                {
-                    food: "Mozzarella",
-                    cal: "78 cal"
-                },
-                {
-                    food: "Muenster Cheese",
-                    cal: "103 cal"
-                },
-                {
-                    food: "Neufchatel",
-                    cal: "215 cal"
-                },
-                {
-                    food: "Parmesan",
-                    cal: "22 cal"
-                },
-                {
-                    food: "Pecorino",
-                    cal: "19 cal"
-                },
-                {
-                    food: "Provolone",
-                    cal: "98 cal"
-                },
-                {
-                    food: "Raclette Cheese",
-                    cal: "89 cal"
-                },
-                {
-                    food: "Ricotta",
-                    cal: "428 cal"
-                },
-                {
-                    food: "Romano",
-                    cal: "550 cal"
-                },
-                {
-                    food: "Roquefort",
-                    cal: "103 cal"
-                },
-                {
-                    food: "Sheep Cheese",
-                    cal: "102 cal"
-                },
-                {
-                    food: "Soft Cheese",
-                    cal: "75 cal"
-                },
-                {
-                    food: "Stilton Cheese",
-                    cal: "110 cal"
-                },
-                {
-                    food: "String Cheese",
-                    cal: "70 cal"
-                },
-                {
-                    food: "Swiss Cheese",
-                    cal: "95 cal"
-                },
-                {
-                    food: "White Cheddar",
-                    cal: "532 cal"
-                },
-                {
-                    food: "Wisconsin Cheese",
-                    cal: "109 cal"
-                },
-                {
-                    food: "Baby Back Ribs",
-                    cal: "360 cal"
-                },
-                {
-                    food: "Bacon and Eggs",
-                    cal: "539 cal"
-                },
-                {
-                    food: "Baked Beans",
-                    cal: "244 cal"
-                },
-                {
-                    food: "Baked Chicken",
-                    cal: "282 cal"
-                },
-                {
-                    food: "BBQ Ribs",
-                    cal: "360 cal"
-                },
-                {
-                    food: "Beef Stew",
-                    cal: "186 cal"
-                },
-                {
-                    food: "Biryani",
-                    cal: "484 cal"
-                },
-                {
-                    food: "Black Pudding",
-                    cal: "101 cal"
-                },
-                {
-                    food: "Black Rice",
-                    cal: "323 cal"
-                },
-                {
-                    food: "BLT",
-                    cal: "593 cal"
-                },
-                {
-                    food: "Brown Rice",
-                    cal: "670 cal"
-                },
-                {
-                    food: "Burrito",
-                    cal: "326 cal"
-                },
-                {
-                    food: "Butter Chicken",
-                    cal: "490 cal"
-                },
-                {
-                    food: "California Roll",
-                    cal: "33 cal"
-                },
-                {
-                    food: "Chicken Caesar Salad",
-                    cal: "392 cal"
-                },
-                {
-                    food: "Chicken Fried Steak",
-                    cal: "423 cal"
-                },
-                {
-                    food: "Chicken Marsala",
-                    cal: "2209 cal"
-                },
-                {
-                    food: "Chicken Parmesan",
-                    cal: "250 cal"
-                },
-                {
-                    food: "Chicken Pot Pie",
-                    cal: "673 cal"
-                },
-                {
-                    food: "Chicken Tikka Masala",
-                    cal: "195 cal"
-                },
-                {
-                    food: "Chili con Carne",
-                    cal: "266 cal"
-                },
-                {
-                    food: "Chimichanga",
-                    cal: "418 cal"
-                },
-                {
-                    food: "Cobb Salad",
-                    cal: "632 cal"
-                },
-                {
-                    food: "Collard Greens",
-                    cal: "13 cal"
-                },
-                {
-                    food: "Corn Dog",
-                    cal: "438 cal"
-                },
-                {
-                    food: "Corned Beef Hash",
-                    cal: "349 cal"
-                },
-                {
-                    food: "Cottage Pie",
-                    cal: "523 cal"
-                },
-                {
-                    food: "Dal",
-                    cal: "304 cal"
-                },
-                {
-                    food: "Deviled Eggs",
-                    cal: "62 cal"
-                },
-                {
-                    food: "Dim Sum",
-                    cal: "37 cal"
-                },
-                {
-                    food: "Dosa",
-                    cal: "287 cal"
-                },
-                {
-                    food: "Enchiladas",
-                    cal: "323 cal"
-                },
-                {
-                    food: "Fajita",
-                    cal: "290 cal"
-                },
-                {
-                    food: "Fish and Chips",
-                    cal: "585 cal"
-                },
-                {
-                    food: "Fried Rice",
-                    cal: "662 cal"
-                },
-                {
-                    food: "Fried Shrimp",
-                    cal: "75 cal"
-                },
-                {
-                    food: "Grilled Cheese Sandwich",
-                    cal: "392 cal"
-                },
-                {
-                    food: "Ham and Cheese Sandwich",
-                    cal: "352 cal"
-                },
-                {
-                    food: "Hummus",
-                    cal: "435 cal"
-                },
-                {
-                    food: "Jambalaya",
-                    cal: "250 cal"
-                },
-                {
-                    food: "Kebab",
-                    cal: "774 cal"
-                },
-                {
-                    food: "Lasagne",
-                    cal: "284 cal"
-                },
-                {
-                    food: "Mac and Cheese",
-                    cal: "699 cal"
-                },
-                {
-                    food: "Macaroni and Cheese",
-                    cal: "699 cal"
-                },
-                {
-                    food: "Mashed Potatoes",
-                    cal: "174 cal"
-                },
-                {
-                    food: "Meat Pie",
-                    cal: "290 cal"
-                },
-                {
-                    food: "Meatloaf",
-                    cal: "721 cal"
-                },
-                {
-                    food: "Naan",
-                    cal: "260 cal"
-                },
-                {
-                    food: "Orange Chicken",
-                    cal: "420 cal"
-                },
-                {
-                    food: "Pad Thai",
-                    cal: "375 cal"
-                },
-                {
-                    food: "Paella",
-                    cal: "200 cal"
-                },
-                {
-                    food: "Paratha",
-                    cal: "260 cal"
-                },
-                {
-                    food: "Pea Soup",
-                    cal: "190 cal"
-                },
-                {
-                    food: "Peanut Butter Sandwich",
-                    cal: "200 cal"
-                },
-                {
-                    food: "Peking Duck",
-                    cal: "401 cal"
-                },
-                {
-                    food: "Philly Cheese Steak",
-                    cal: "300 cal"
-                },
-                {
-                    food: "Pizza",
-                    cal: "272 cal"
-                },
-                {
-                    food: "Pork Chop",
-                    cal: "295 cal"
-                },
-                {
-                    food: "Potato Salad",
-                    cal: "136 cal"
-                },
-                {
-                    food: "Pulled Pork Sandwich",
-                    cal: "551 cal"
-                },
-                {
-                    food: "Ramen",
-                    cal: "380 cal"
-                },
-                {
-                    food: "Ravioli",
-                    cal: "134 cal"
-                },
-                {
-                    food: "Reuben Sandwich",
-                    cal: "641 cal"
-                },
-                {
-                    food: "Roast Beef",
-                    cal: "23 cal"
-                },
-                {
-                    food: "Roast Dinner",
-                    cal: "240 cal"
-                },
-                {
-                    food: "Samosa",
-                    cal: "107 cal"
-                },
-                {
-                    food: "Sausage Roll",
-                    cal: "361 cal"
-                },
-                {
-                    food: "Sausage Rolls",
-                    cal: "101 cal"
-                },
-                {
-                    food: "Shepherds Pie",
-                    cal: "159 cal"
-                },
-                {
-                    food: "Shrimp Cocktail",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Sloppy Joe",
-                    cal: "101 cal"
-                },
-                {
-                    food: "Sloppy Joes",
-                    cal: "397 cal"
-                },
-                {
-                    food: "Spaghetti Bolognese",
-                    cal: "374 cal"
-                },
-                {
-                    food: "Spring Roll",
-                    cal: "350 cal"
-                },
-                {
-                    food: "Spring Rolls",
-                    cal: "350 cal"
-                },
-                {
-                    food: "Taco",
-                    cal: "213 cal"
-                },
-                {
-                    food: "Tandoori Chicken",
-                    cal: "198 cal"
-                },
-                {
-                    food: "Yorkshire Pudding",
-                    cal: "83 cal"
-                },
-                {
-                    food: "Alphabet Soup",
-                    cal: "62 cal"
-                },
-                {
-                    food: "Bean Stew",
-                    cal: "335 cal"
-                },
-                {
-                    food: "Beef Bouillon",
-                    cal: "7 cal"
-                },
-                {
-                    food: "Beef Noodle Soup",
-                    cal: "83 cal"
-                },
-                {
-                    food: "Beef Soup",
-                    cal: "70 cal"
-                },
-                {
-                    food: "Bouillon",
-                    cal: "39 cal"
-                },
-                {
-                    food: "Broccoli Cheese Soup",
-                    cal: "264 cal"
-                },
-                {
-                    food: "Broccoli Soup",
-                    cal: "206 cal"
-                },
-                {
-                    food: "Cabbage Soup",
-                    cal: "69 cal"
-                },
-                {
-                    food: "Carrot Ginger Soup",
-                    cal: "95 cal"
-                },
-                {
-                    food: "Carrot Soup",
-                    cal: "95 cal"
-                },
-                {
-                    food: "Chicken Bouillon",
-                    cal: "10 cal"
-                },
-                {
-                    food: "Chicken Broth",
-                    cal: "39 cal"
-                },
-                {
-                    food: "Chicken Gumbo Soup",
-                    cal: "56 cal"
-                },
-                {
-                    food: "Chicken Noodle Soup",
-                    cal: "62 cal"
-                },
-                {
-                    food: "Chicken Stock",
-                    cal: "39 cal"
-                },
-                {
-                    food: "Chicken Vegetable Soup",
-                    cal: "77 cal"
-                },
-                {
-                    food: "Chicken with Rice Soup",
-                    cal: "58 cal"
-                },
-                {
-                    food: "Cream of Asparagus Soup",
-                    cal: "85 cal"
-                },
-                {
-                    food: "Cream of Broccoli Soup",
-                    cal: "140 cal"
-                },
-                {
-                    food: "Cream of Celery Soup",
-                    cal: "92 cal"
-                },
-                {
-                    food: "Cream of Chicken Soup",
-                    cal: "117 cal"
-                },
-                {
-                    food: "Cream of Mushroom Soup",
-                    cal: "97 cal"
-                },
-                {
-                    food: "Cream of Onion Soup",
-                    cal: "107 cal"
-                },
-                {
-                    food: "Cream of Potato Soup",
-                    cal: "73 cal"
-                },
-                {
-                    food: "Creamy Chicken Noodle Soup",
-                    cal: "56 cal"
-                },
-                {
-                    food: "French Onion Soup",
-                    cal: "56 cal"
-                },
-                {
-                    food: "Golden Mushroom Soup",
-                    cal: "161 cal"
-                },
-                {
-                    food: "Goulash",
-                    cal: "1887 cal"
-                },
-                {
-                    food: "Instant Ramen",
-                    cal: "371 cal"
-                },
-                {
-                    food: "Lentil Soup",
-                    cal: "139 cal"
-                },
-                {
-                    food: "Lobster Bisque Soup",
-                    cal: "248 cal"
-                },
-                {
-                    food: "Meatball Soup",
-                    cal: "120 cal"
-                },
-                {
-                    food: "Minestrone",
-                    cal: "82 cal"
-                },
-                {
-                    food: "Mushroom Soup",
-                    cal: "85 cal"
-                },
-                {
-                    food: "Noodle Soup",
-                    cal: "83 cal"
-                },
-                {
-                    food: "Onion Soup",
-                    cal: "56 cal"
-                },
-                {
-                    food: "Oxtail Soup",
-                    cal: "68 cal"
-                },
-                {
-                    food: "Pea Soup",
-                    cal: "190 cal"
-                },
-                {
-                    food: "Potato Soup",
-                    cal: "192 cal"
-                },
-                {
-                    food: "Pumpkin Soup",
-                    cal: "71 cal"
-                },
-                {
-                    food: "Ramen",
-                    cal: "371 cal"
-                },
-                {
-                    food: "Scotch Broth",
-                    cal: "80 cal"
-                },
-                {
-                    food: "Succotash",
-                    cal: "221 cal"
-                },
-                {
-                    food: "Thai Soup",
-                    cal: "147 cal"
-                },
-                {
-                    food: "Tomato Rice Soup",
-                    cal: "116 cal"
-                },
-                {
-                    food: "Tomato Soup",
-                    cal: "74 cal"
-                },
-                {
-                    food: "Vegetable Beef Soup",
-                    cal: "76 cal"
-                },
-                {
-                    food: "Vegetable Broth",
-                    cal: "12 cal"
-                },
-                {
-                    food: "Vegetable Soup",
-                    cal: "67 cal"
-                },
-                {
-                    food: "Vegetable Stock",
-                    cal: "12 cal"
-                },
-                {
-                    food: "Wedding Soup",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Baskin-Robbins",
-                    cal: "170 cal"
-                },
-                {
-                    food: "Ben and Jerry’s",
-                    cal: "210 cal"
-                },
-                {
-                    food: "Butter Pecan Ice Cream",
-                    cal: "280 cal"
-                },
-                {
-                    food: "Carvel",
-                    cal: "449 cal"
-                },
-                {
-                    food: "Chocolate Chip Ice Cream",
-                    cal: "155 cal"
-                },
-                {
-                    food: "Chocolate Ice Cream",
-                    cal: "156 cal"
-                },
-                {
-                    food: "Ciao Bella",
-                    cal: "240 cal"
-                },
-                {
-                    food: "Coffee Ice Cream",
-                    cal: "170 cal"
-                },
-                {
-                    food: "Cold Stone Creamery",
-                    cal: "329 cal"
-                },
-                {
-                    food: "Cookie Dough Ice Cream",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Crunchie McFlurry",
-                    cal: "318 cal"
-                },
-                {
-                    food: "Dairy Milk McFlurry",
-                    cal: "340 cal"
-                },
-                {
-                    food: "Dippin Dots",
-                    cal: "381 cal"
-                },
-                {
-                    food: "Double Rainbow",
-                    cal: "185 cal"
-                },
-                {
-                    food: "Drumsticks",
-                    cal: "360 cal"
-                },
-                {
-                    food: "French Vanilla Ice Cream",
-                    cal: "145 cal"
-                },
-                {
-                    food: "Friendly’s",
-                    cal: "140 cal"
-                },
-                {
-                    food: "Healthy Choice",
-                    cal: "80 cal"
-                },
-                {
-                    food: "Hot Fudge Sundae",
-                    cal: "333 cal"
-                },
-                {
-                    food: "Ice Cream Sandwich",
-                    cal: "265 cal"
-                },
-                {
-                    food: "Ice Cream Sundae",
-                    cal: "253 cal"
-                },
-                {
-                    food: "Ice Milk",
-                    cal: "164 cal"
-                },
-                {
-                    food: "Magnolia",
-                    cal: "166 cal"
-                },
-                {
-                    food: "Magnum",
-                    cal: "258 cal"
-                },
-                {
-                    food: "Magnum Almond",
-                    cal: "271 cal"
-                },
-                {
-                    food: "Magnum Double Caramel",
-                    cal: "305 cal"
-                },
-                {
-                    food: "Magnum Double Chocolate",
-                    cal: "327 cal"
-                },
-                {
-                    food: "Magnum Gold",
-                    cal: "290 cal"
-                },
-                {
-                    food: "Magnum White",
-                    cal: "255 cal"
-                },
-                {
-                    food: "McFlurry",
-                    cal: "205 cal"
-                },
-                {
-                    food: "McFlurry Oreo",
-                    cal: "340 cal"
-                },
-                {
-                    food: "Mini Milk",
-                    cal: "30 cal"
-                },
-                {
-                    food: "Mint Chocolate Chip Ice Cream",
-                    cal: "172 cal"
-                },
-                {
-                    food: "Rocky Road Ice Cream",
-                    cal: "290 cal"
-                },
-                {
-                    food: "Schwan’s",
-                    cal: "177 cal"
-                },
-                {
-                    food: "Smarties McFlurry",
-                    cal: "400 cal"
-                },
-                {
-                    food: "Snickers Ice Cream",
-                    cal: "180 cal"
-                },
-                {
-                    food: "Soft Serve",
-                    cal: "191 cal"
-                },
-                {
-                    food: "Solero",
-                    cal: "75 cal"
-                },
-                {
-                    food: "Strawberry Ice Cream",
-                    cal: "170 cal"
-                },
-                {
-                    food: "Strawberry Sundae",
-                    cal: "281 cal"
-                },
-                {
-                    food: "Sundae",
-                    cal: "155 cal"
-                },
-                {
-                    food: "Turkey Hill",
-                    cal: "190 cal"
-                },
-                {
-                    food: "Vanilla Cone",
-                    cal: "230 cal"
-                },
-                {
-                    food: "Vanilla Ice Cream",
-                    cal: "145 ca"
-                },
-                {
-                    food: "Acai Juice",
-                    cal: "139 cal"
-                },
-                {
-                    food: "Aloe Vera",
-                    cal: "106 cal"
-                },
-                {
-                    food: "Apple Juice",
-                    cal: "110 cal"
-                },
-                {
-                    food: "Apricot Nectar",
-                    cal: "134 cal"
-                },
-                {
-                    food: "Banana Juice",
-                    cal: "120 cal"
-                },
-                {
-                    food: "Blackberry Juice",
-                    cal: "115 cal"
-                },
-                {
-                    food: "Boysenberry Juice",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Capri-Sun",
-                    cal: "82 cal"
-                },
-                {
-                    food: "Carrot Juice",
-                    cal: "96 cal"
-                },
-                {
-                    food: "Chamomile Tea",
-                    cal: "0 cal"
-                },
-                {
-                    food: "Cherry Juice",
-                    cal: "108 cal"
-                },
-                {
-                    food: "Clamato",
-                    cal: "144 cal"
-                },
-                {
-                    food: "Coconut Milk",
-                    cal: "559 cal"
-                },
-                {
-                    food: "Coconut Water",
-                    cal: "46 cal"
-                },
-                {
-                    food: "Concord Grape",
-                    cal: "170 cal"
-                },
-                {
-                    food: "Cranberry Apple Juice",
-                    cal: "161 cal"
-                },
-                {
-                    food: "Cranberry Grape Juice",
-                    cal: "170 cal"
-                },
-                {
-                    food: "Cranberry Juice",
-                    cal: "110 cal"
-                },
-                {
-                    food: "Cucumber Juice",
-                    cal: "24 cal"
-                },
-                {
-                    food: "Currant Juice",
-                    cal: "115 cal"
-                },
-                {
-                    food: "Energy-Drink",
-                    cal: "309 cal"
-                },
-                {
-                    food: "Fruitopia",
-                    cal: "264 cal"
-                },
-                {
-                    food: "Grape Juice",
-                    cal: "144 cal"
-                },
-                {
-                    food: "Grapefruit Juice",
-                    cal: "110 cal"
-                },
-                {
-                    food: "Lemon Juice",
-                    cal: "50 cal"
-                },
-                {
-                    food: "Lemonade",
-                    cal: "120 cal"
-                },
-                {
-                    food: "Lime Juice",
-                    cal: "50 cal"
-                },
-                {
-                    food: "Limeade",
-                    cal: "307 cal"
-                },
-                {
-                    food: "Mango Lassi",
-                    cal: "158 cal"
-                },
-                {
-                    food: "Nestea",
-                    cal: "50 cal"
-                },
-                {
-                    food: "Orange Juice",
-                    cal: "110 cal"
-                },
-                {
-                    food: "Papaya Juice",
-                    cal: "139 cal"
-                },
-                {
-                    food: "Passion Fruit Juice",
-                    cal: "115 cal"
-                },
-                {
-                    food: "Peach Juice",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Peach Nectar",
-                    cal: "130 cal"
-                },
-                {
-                    food: "Pear Juice",
-                    cal: "144 cal"
-                },
-                {
-                    food: "Pear Nectar",
-                    cal: "144 cal"
-                },
-                {
-                    food: "Pineapple Juice",
-                    cal: "127 cal"
-                },
-                {
-                    food: "Pineapple Orange Juice",
-                    cal: "120 cal"
-                },
-                {
-                    food: "Plum Juice",
-                    cal: "170 cal"
-                },
-                {
-                    food: "Pomegranate Juice",
-                    cal: "158 cal"
-                },
-                {
-                    food: "Sauerkraut Juice",
-                    cal: "34 cal"
-                },
-                {
-                    food: "Tangerine Juice",
-                    cal: "103 cal"
-                },
-                {
-                    food: "Tomato Juice",
-                    cal: "41 cal"
-                },
-                {
-                    food: "Vegetable Juice",
-                    cal: "50 cal"
-                },
-                {
-                    food: "White Grape Juice",
-                    cal: "180 cal"
-                },
-                {
-                    food: "Burrito",
-                    cal: "206 cal"
-                }
-            ]
-            var str = '', a='a', count=0;
-           var food = getStorage('food');    
-           data.map(d=>{
-               if(d.food.toLowerCase().includes(food)){
-               str += `<li class="list-group-item" id="${a}" onclick="takeCalorie('${d.cal}','${a}')">${d.food} : ${d.cal}</li>`;
-            a = a + 'a';
-            count++;
-               }
-            })
-            a = '';
-            if(count==0){
-                alert("Coudnt recognize plz upload again ")
-                window.location.href="index.html"
+        data = [
+            {
+                food: "Acai",
+                cal: "20 cal"
+            },
+            {
+                food: "Apple",
+                cal: "95 cal"
+            },
+            {
+                food: "Applesauce",
+                cal: "167 cal"
+            },
+            {
+                food: "Apricot",
+                cal: "17 cal"
+            },
+            {
+                food: "Avocado",
+                cal: "320 cal"
+            },
+            {
+                food: "Banana",
+                cal: "111 cal"
+            },
+            {
+                food: "Blackberries",
+                cal: "62 cal"
+            },
+            {
+                food: "Blood Oranges",
+                cal: "70 cal"
+            },
+            {
+                food: "Blueberries",
+                cal: "84 cal"
+            },
+            {
+                food: "Cantaloupe",
+                cal: "23 cal"
+            },
+            {
+                food: "Cherries",
+                cal: "4 cal"
+            },
+            {
+                food: "Clementine",
+                cal: "35 cal"
+            },
+            {
+                food: "Cranberries",
+                cal: "46 cal"
+            },
+            {
+                food: "Currants",
+                cal: "63 cal"
+            },
+            {
+                food: "Custard Apple",
+                cal: "136 cal"
+            },
+            {
+                food: "Dates",
+                cal: "20 cal"
+            },
+            {
+                food: "Figs",
+                cal: "37 cal"
+            },
+            {
+                food: "Fruit salad",
+                cal: "125 cal"
+            },
+            {
+                food: "Grapes",
+                cal: "104 cal"
+            },
+            {
+                food: "Greengage",
+                cal: "2 cal"
+            },
+            {
+                food: "Guava",
+                cal: "37 cal"
+            },
+            {
+                food: "Jackfruit",
+                cal: "143 cal"
+            },
+            {
+                food: "Jujube",
+                cal: "22 cal"
+            },
+            {
+                food: "Kiwi",
+                cal: "112 cal"
+            },
+            {
+                food: "Lemon",
+                cal: "17 cal"
+            },
+            {
+                food: "Lime",
+                cal: "20 cal"
+            },
+            {
+                food: "Lychees",
+                cal: "7 cal"
+            },
+            {
+                food: "Mandarin Oranges",
+                cal: "47 cal"
+            },
+            {
+                food: "Mango",
+                cal: "202 cal"
+            },
+            {
+                food: "Minneola",
+                cal: "70 cal"
+            },
+            {
+                food: "Mulberries",
+                cal: "60 cal"
+            },
+            {
+                food: "Nectarine",
+                cal: "66 cal"
+            },
+            {
+                food: "Olives",
+                cal: "2 cal"
+            },
+            {
+                food: "Orange",
+                cal: "62 cal"
+            },
+            {
+                food: "Papaya",
+                cal: "215 cal"
+            },
+            {
+                food: "Passion Fruit",
+                cal: "17 cal"
+            },
+            {
+                food: "Peach",
+                cal: "59 cal"
+            },
+            {
+                food: "Pear",
+                cal: "101 cal"
+            },
+            {
+                food: "Persimmon",
+                cal: "32 cal"
+            },
+            {
+                food: "Physalis",
+                cal: "2 cal"
+            },
+            {
+                food: "Pineapple",
+                cal: "453 cal"
+            },
+            {
+                food: "Plantains",
+                cal: "218 cal"
+            },
+            {
+                food: "Plum",
+                cal: "30 cal"
+            },
+            {
+                food: "Pomegranate",
+                cal: "234 cal"
+            },
+            {
+                food: "Quince",
+                cal: "52 cal"
+            },
+            {
+                food: "Raisins",
+                cal: "434 cal"
+            },
+            {
+                food: "Rambutan",
+                cal: "7 cal"
+            },
+            {
+                food: "Raspberries",
+                cal: "64 cal"
+            },
+            {
+                food: "Rhubarb",
+                cal: "11 cal"
+            },
+            {
+                food: "Starfruit",
+                cal: "28 cal"
+            },
+            {
+                food: "Strawberries",
+                cal: "49 cal"
+            },
+            {
+                food: "Tamarind",
+                cal: "5 cal"
+            },
+            {
+                food: "Tangerine",
+                cal: "47 cal"
+            },
+            {
+                food: "Watermelon",
+                cal: "86 cal"
+            },
+            {
+                food: "Artichoke",
+                cal: "60 cal"
+            },
+            {
+                food: "Arugula",
+                cal: "1 cal"
+            },
+            {
+                food: "Asparagus",
+                cal: "2 cal"
+            },
+            {
+                food: "Aubergine",
+                cal: "115 cal"
+            },
+            {
+                food: "Beetroot",
+                cal: "35 cal"
+            },
+            {
+                food: "Bell Pepper",
+                cal: "15 cal"
+            },
+            {
+                food: "Black Olives",
+                cal: "2 cal"
+            },
+            {
+                food: "Broccoli",
+                cal: "207 cal"
+            },
+            {
+                food: "Brussels Sprouts",
+                cal: "8 cal"
+            },
+            {
+                food: "Cabbage",
+                cal: "227 cal"
+            },
+            {
+                food: "Capsicum",
+                cal: "12 cal"
+            },
+            {
+                food: "Carrot",
+                cal: "25 cal"
+            },
+            {
+                food: "Cauliflower",
+                cal: "3 cal"
+            },
+            {
+                food: "Celery",
+                cal: "6 cal"
+            },
+            {
+                food: "Chard",
+                cal: "9 cal"
+            },
+            {
+                food: "Cherry Tomato",
+                cal: "20 cal"
+            },
+            {
+                food: "Chicory",
+                cal: "38 cal"
+            },
+            {
+                food: "Chinese Cabbage",
+                cal: "134 cal"
+            },
+            {
+                food: "Chives",
+                cal: "1 cal"
+            },
+            {
+                food: "Collard Greens",
+                cal: "12 cal"
+            },
+            {
+                food: "Corn",
+                cal: "562 cal"
+            },
+            {
+                food: "Courgette",
+                cal: "33 cal"
+            },
+            {
+                food: "Creamed Spinach",
+                cal: "148 cal"
+            },
+            {
+                food: "Cucumber",
+                cal: "66 cal"
+            },
+            {
+                food: "Eggplant",
+                cal: "115 cal"
+            },
+            {
+                food: "Endive",
+                cal: "87 cal"
+            },
+            {
+                food: "Fennel",
+                cal: "73 cal"
+            },
+            {
+                food: "Garlic",
+                cal: "4 cal"
+            },
+            {
+                food: "Gherkin",
+                cal: "9 cal"
+            },
+            {
+                food: "Gourd",
+                cal: "108 cal"
+            },
+            {
+                food: "Green Beans",
+                cal: "34 cal"
+            },
+            {
+                food: "Green Olives",
+                cal: "2 cal"
+            },
+            {
+                food: "Green Onion",
+                cal: "5 cal"
+            },
+            {
+                food: "Horseradish",
+                cal: "7 cal"
+            },
+            {
+                food: "Kale",
+                cal: "33 cal"
+            },
+            {
+                food: "Kohlrabi",
+                cal: "108 cal"
+            },
+            {
+                food: "Kumara",
+                cal: "112 cal"
+            },
+            {
+                food: "Leek",
+                cal: "54 cal"
+            },
+            {
+                food: "Lettuce",
+                cal: "90 cal"
+            },
+            {
+                food: "Mushrooms",
+                cal: "1 cal"
+            },
+            {
+                food: "Mustard Greens",
+                cal: "15 cal"
+            },
+            {
+                food: "Nori",
+                cal: "1 cal"
+            },
+            {
+                food: "Okra",
+                cal: "4 cal"
+            },
+            {
+                food: "Olives",
+                cal: "2 cal"
+            },
+            {
+                food: "Onion",
+                cal: "34 cal"
+            },
+            {
+                food: "Parsnips",
+                cal: "128 cal"
+            },
+            {
+                food: "Peas",
+                cal: "79 cal"
+            },
+            {
+                food: "Pepper",
+                cal: "20 cal"
+            },
+            {
+                food: "Potato",
+                cal: "164 cal"
+            },
+            {
+                food: "Pumpkin",
+                cal: "51 cal"
+            },
+            {
+                food: "Radishes",
+                cal: "1 cal"
+            },
+            {
+                food: "Red Cabbage",
+                cal: "7 cal"
+            },
+            {
+                food: "Rutabaga",
+                cal: "147 cal"
+            },
+            {
+                food: "Shallots",
+                cal: "18 cal"
+            },
+            {
+                food: "Spinach",
+                cal: "78 cal"
+            },
+            {
+                food: "Squash",
+                cal: "88 cal"
+            },
+            {
+                food: "Sweet Potato",
+                cal: "112 cal"
+            },
+            {
+                food: "Tomato",
+                cal: "20 cal"
+            },
+            {
+                food: "Turnip Greens",
+                cal: "34 cal"
+            },
+            {
+                food: "Turnips",
+                cal: "34 cal"
+            },
+            {
+                food: "Wasabi",
+                cal: "184 cal"
+            },
+            {
+                food: "Winter Squash",
+                cal: "147 cal"
+            },
+            {
+                food: "Zucchini",
+                cal: "3cal"
+            },
+            {
+                food: "Arby’s Grand Turkey Club",
+                cal: "489 cal"
+            },
+            {
+                food: "Arby’s Reuben",
+                cal: "641 cal"
+            },
+            {
+                food: "Arby’s Roast Beef Classic",
+                cal: "360 cal"
+            },
+            {
+                food: "Arby’s Roast Beef Max",
+                cal: "360 cal"
+            },
+            {
+                food: "BBQ Rib",
+                cal: "142 cal"
+            },
+            {
+                food: "Bean Burrito",
+                cal: "380 cal"
+            },
+            {
+                food: "Big N’ Tasty",
+                cal: "517 cal"
+            },
+            {
+                food: "Bratwurst",
+                cal: "283 cal"
+            },
+            {
+                food: "Burger King Angry Whopper",
+                cal: "740 cal"
+            },
+            {
+                food: "Burger King Double Whopper",
+                cal: "894 cal"
+            },
+            {
+                food: "Burger King Double Whopper with Cheese",
+                cal: "994 cal"
+            },
+            {
+                food: "Burger King Original Chicken Sandwich",
+                cal: "659 cal"
+            },
+            {
+                food: "Burger King Premium Alaskan Fish Sandwich",
+                cal: "591 cal"
+            },
+            {
+                food: "Burger King Triple Whopper",
+                cal: "1471 cal"
+            },
+            {
+                food: "Burger King Whopper",
+                cal: "672 cal"
+            },
+            {
+                food: "Burger King Whopper Jr.",
+                cal: "346 cal"
+            },
+            {
+                food: "Burger King Whopper with Cheese",
+                cal: "759 cal"
+            },
+            {
+                food: "Cheeseburger",
+                cal: "410 cal"
+            },
+            {
+                food: "Chicken Breast",
+                cal: "116 cal"
+            },
+            {
+                food: "Chicken Fajita",
+                cal: "326 cal"
+            },
+            {
+                food: "Chicken McNuggets",
+                cal: "48 cal"
+            },
+            {
+                food: "Chicken Nuggets",
+                cal: "59 cal"
+            },
+            {
+                food: "Chicken Pizziola",
+                cal: "451 cal"
+            },
+            {
+                food: "Chicken Sandwich",
+                cal: "410 cal"
+            },
+            {
+                food: "Chicken Teriyaki Sandwich",
+                cal: "367 cal"
+            },
+            {
+                food: "Chicken Wings",
+                cal: "94 cal"
+            },
+            {
+                food: "Chop Suey",
+                cal: "585 cal"
+            },
+            {
+                food: "Curly Fries",
+                cal: "398 cal"
+            },
+            {
+                food: "Double Cheeseburger",
+                cal: "414 cal"
+            },
+            {
+                food: "Egg Roll",
+                cal: "200 cal"
+            },
+            {
+                food: "Falafel",
+                cal: "57 cal"
+            },
+            {
+                food: "Filet-o-Fish",
+                cal: "400 cal"
+            },
+            {
+                food: "Fish and Chips",
+                cal: "585 cal"
+            },
+            {
+                food: "Fish Sandwich",
+                cal: "431 cal"
+            },
+            {
+                food: "French Fries",
+                cal: "222 cal"
+            },
+            {
+                food: "Grilled Chicken Salad",
+                cal: "268 cal"
+            },
+            {
+                food: "Ham Sandwich",
+                cal: "352 cal"
+            },
+            {
+                food: "Hamburger",
+                cal: "279 cal"
+            },
+            {
+                food: "Hot Dog",
+                cal: "312 cal"
+            },
+            {
+                food: "Italian BMT",
+                cal: "410 cal"
+            },
+            {
+                food: "Lasagna",
+                cal: "172 cal"
+            },
+            {
+                food: "McDonald’s Big Mac",
+                cal: "561 cal"
+            },
+            {
+                food: "McDonald’s Cheeseburger",
+                cal: "300 cal"
+            },
+            {
+                food: "McDonald’s Chicken Nuggets",
+                cal: "48 cal"
+            },
+            {
+                food: "McDonald’s Double Cheeseburger",
+                cal: "437 cal"
+            },
+            {
+                food: "McDonald’s Filet-o-Fish",
+                cal: "391 cal"
+            },
+            {
+                food: "McDonald’s McChicken",
+                cal: "359 cal"
+            },
+            {
+                food: "McDonald’s McDouble",
+                cal: "403 cal"
+            },
+            {
+                food: "McDonald’s McMuffi Egg",
+                cal: "290 cal"
+            },
+            {
+                food: "McDonald’s McRib",
+                cal: "451 cal"
+            },
+            {
+                food: "McDonald’s Mighty Wings",
+                cal: "95 cal"
+            },
+            {
+                food: "McRib",
+                cal: "451 cal"
+            },
+            {
+                food: "Meatball Sandwich",
+                cal: "481 cal"
+            },
+            {
+                food: "Nachos with Cheese",
+                cal: "575 cal"
+            },
+            {
+                food: "Onion Rings",
+                cal: "25 cal"
+            },
+            {
+                food: "Poutine",
+                cal: "511 cal"
+            },
+            {
+                food: "Smoked Salmon",
+                cal: "44 cal"
+            },
+            {
+                food: "Spicy Italian",
+                cal: "480 cal"
+            },
+            {
+                food: "Subway Club Sandwich",
+                cal: "312 cal"
+            },
+            {
+                food: "Tortilla Wrap",
+                cal: "171 cal"
+            },
+            {
+                food: "Tuna",
+                cal: "24 cal"
+            },
+            {
+                food: "Turkey",
+                cal: "29 cal"
+            },
+            {
+                food: "Veggie Burger",
+                cal: "389 cal"
+            },
+            {
+                food: "Veggie Delight",
+                cal: "229 cal"
+            },
+            {
+                food: "Veggie Patty",
+                cal: "963 cal"
+            },
+            {
+                food: "Wendy’s Baconator",
+                cal: "839 cal"
+            },
+            {
+                food: "Wendy’s Jr. Bacon Cheeseburger",
+                cal: "420 cal"
+            },
+            {
+                food: "Wendy’s Jr. Cheeseburger",
+                cal: "290 cal"
+            },
+            {
+                food: "Wendy’s Son of Baconator",
+                cal: "700 cal"
+            },
+            {
+                food: "Whopper",
+                cal: "672 cal"
+            },
+            {
+                food: "Zinger",
+                cal: "517 cal"
+            },
+            {
+                food: "Zinger Burger",
+                cal: "517 cal"
+            },
+            {
+                food: "BBQ Chicken Pizza",
+                cal: "309 cal"
+            },
+            {
+                food: "BBQ Pizza",
+                cal: "314 cal"
+            },
+            {
+                food: "Beef Pizza",
+                cal: "714 cal"
+            },
+            {
+                food: "Bianca Pizza",
+                cal: "460 cal"
+            },
+            {
+                food: "Buffalo Chicken Pizza",
+                cal: "600 cal"
+            },
+            {
+                food: "Calabrese Pizza",
+                cal: "254 cal"
+            },
+            {
+                food: "Calzone",
+                cal: "841 cal"
+            },
+            {
+                food: "Capricciosa Pizza",
+                cal: "192 cal"
+            },
+            {
+                food: "Cheese Pizza",
+                cal: "168 cal"
+            },
+            {
+                food: "Chicken Pizza",
+                cal: "309 cal"
+            },
+            {
+                food: "Deep Dish Pizza",
+                cal: "313 cal"
+            },
+            {
+                food: "Dominos Philly Cheese Steak Pizza",
+                cal: "356 cal"
+            },
+            {
+                food: "Four Cheese Pizza",
+                cal: "250 cal"
+            },
+            {
+                food: "Goat Cheese Pizza",
+                cal: "138 cal"
+            },
+            {
+                food: "Grilled Pizza",
+                cal: "280 cal"
+            },
+            {
+                food: "Hawaiian Pizza",
+                cal: "154 cal"
+            },
+            {
+                food: "Margherita Pizza",
+                cal: "173 cal"
+            },
+            {
+                food: "Mozzarella Pizza",
+                cal: "154 cal"
+            },
+            {
+                food: "Mushroom Pizza",
+                cal: "611 cal"
+            },
+            {
+                food: "Napoli Pizza",
+                cal: "248 cal"
+            },
+            {
+                food: "New York Style Pizza",
+                cal: "174 cal"
+            },
+            {
+                food: "Pepperoni Pizza",
+                cal: "181 cal"
+            },
+            {
+                food: "Pizza Dough",
+                cal: "130 cal"
+            },
+            {
+                food: "Pizza Hut Stuffed Crust Pizza",
+                cal: "380 cal"
+            },
+            {
+                food: "Pizza Hut Supreme Pizza",
+                cal: "305 cal"
+            },
+            {
+                food: "Pizza Rolls",
+                cal: "35 cal"
+            },
+            {
+                food: "Quattro Formaggi Pizza",
+                cal: "330 cal"
+            },
+            {
+                food: "Red Pepper Pizza",
+                cal: "165 cal"
+            },
+            {
+                food: "Salami Pizza",
+                cal: "181 cal"
+            },
+            {
+                food: "Sausage Pizza",
+                cal: "177 cal"
+            },
+            {
+                food: "Seafood Pizza",
+                cal: "186 cal"
+            },
+            {
+                food: "Shrimp Pizza",
+                cal: "190 cal"
+            },
+            {
+                food: "Sicilian Pizza",
+                cal: "321 cal"
+            },
+            {
+                food: "Spinach Feta Pizza",
+                cal: "150 cal"
+            },
+            {
+                food: "Spinach Pizza",
+                cal: "145 cal"
+            },
+            {
+                food: "Stuffed Crust Pizza",
+                cal: "380 cal"
+            },
+            {
+                food: "Tarte Flambée",
+                cal: "142 cal"
+            },
+            {
+                food: "Thin Crust Pizza",
+                cal: "157 cal"
+            },
+            {
+                food: "Tuna Pizza",
+                cal: "318 cal"
+            },
+            {
+                food: "Vegetable Pizza",
+                cal: "399 cal"
+            },
+            {
+                food: "Vegetarian Pizza",
+                cal: "399 cal"
+            },
+            {
+                food: "Veggie Pizza",
+                cal: "263 cal"
+            },
+            {
+                food: "White Pizza",
+                cal: "571 ca"
+            },
+            {
+                food: "American Cheese",
+                cal: "31 cal"
+            },
+            {
+                food: "Applewood",
+                cal: "82 cal"
+            },
+            {
+                food: "Asiago Cheese",
+                cal: "110 cal"
+            },
+            {
+                food: "Babybel",
+                cal: "70 cal"
+            },
+            {
+                food: "Blue Cheese",
+                cal: "99 cal"
+            },
+            {
+                food: "Brie",
+                cal: "100 cal"
+            },
+            {
+                food: "Camembert",
+                cal: "90 cal"
+            },
+            {
+                food: "Cheddar",
+                cal: "89 cal"
+            },
+            {
+                food: "Cheese Fondue",
+                cal: "912 cal"
+            },
+            {
+                food: "Cheese Spread",
+                cal: "44 cal"
+            },
+            {
+                food: "Cheese Whiz",
+                cal: "91 cal"
+            },
+            {
+                food: "Chester",
+                cal: "108 cal"
+            },
+            {
+                food: "Colby Cheese",
+                cal: "520 cal"
+            },
+            {
+                food: "Colby-Jack Cheese",
+                cal: "520 cal"
+            },
+            {
+                food: "Cottage Cheese",
+                cal: "206 cal"
+            },
+            {
+                food: "Dutch Cheese",
+                cal: "110 cal"
+            },
+            {
+                food: "Edam Cheese",
+                cal: "707 cal"
+            },
+            {
+                food: "Emmentaler",
+                cal: "89 cal"
+            },
+            {
+                food: "Feta",
+                cal: "74 cal"
+            },
+            {
+                food: "Fontina",
+                cal: "117 cal"
+            },
+            {
+                food: "Fresh Mozzarella",
+                cal: "78 cal"
+            },
+            {
+                food: "Gjetost",
+                cal: "1058 cal"
+            },
+            {
+                food: "Goat Cheese",
+                cal: "102 cal"
+            },
+            {
+                food: "Gorgonzola",
+                cal: "98 cal"
+            },
+            {
+                food: "Gouda",
+                cal: "705 cal"
+            },
+            {
+                food: "Grated Parmesan",
+                cal: "22 cal"
+            },
+            {
+                food: "Grilled Cheese",
+                cal: "291 cal"
+            },
+            {
+                food: "Gruyere",
+                cal: "103 cal"
+            },
+            {
+                food: "Halloumi",
+                cal: "90 cal"
+            },
+            {
+                food: "Havarti",
+                cal: "104 cal"
+            },
+            {
+                food: "Italian Cheese",
+                cal: "119 cal"
+            },
+            {
+                food: "Jarlsberg",
+                cal: "99 cal"
+            },
+            {
+                food: "Maasdam Cheese",
+                cal: "62 cal"
+            },
+            {
+                food: "Manchego Cheese",
+                cal: "90 cal"
+            },
+            {
+                food: "Monterey",
+                cal: "492 cal"
+            },
+            {
+                food: "Monterey Jack Cheese",
+                cal: "492 cal"
+            },
+            {
+                food: "Mozzarella",
+                cal: "78 cal"
+            },
+            {
+                food: "Muenster Cheese",
+                cal: "103 cal"
+            },
+            {
+                food: "Neufchatel",
+                cal: "215 cal"
+            },
+            {
+                food: "Parmesan",
+                cal: "22 cal"
+            },
+            {
+                food: "Pecorino",
+                cal: "19 cal"
+            },
+            {
+                food: "Provolone",
+                cal: "98 cal"
+            },
+            {
+                food: "Raclette Cheese",
+                cal: "89 cal"
+            },
+            {
+                food: "Ricotta",
+                cal: "428 cal"
+            },
+            {
+                food: "Romano",
+                cal: "550 cal"
+            },
+            {
+                food: "Roquefort",
+                cal: "103 cal"
+            },
+            {
+                food: "Sheep Cheese",
+                cal: "102 cal"
+            },
+            {
+                food: "Soft Cheese",
+                cal: "75 cal"
+            },
+            {
+                food: "Stilton Cheese",
+                cal: "110 cal"
+            },
+            {
+                food: "String Cheese",
+                cal: "70 cal"
+            },
+            {
+                food: "Swiss Cheese",
+                cal: "95 cal"
+            },
+            {
+                food: "White Cheddar",
+                cal: "532 cal"
+            },
+            {
+                food: "Wisconsin Cheese",
+                cal: "109 cal"
+            },
+            {
+                food: "Baby Back Ribs",
+                cal: "360 cal"
+            },
+            {
+                food: "Bacon and Eggs",
+                cal: "539 cal"
+            },
+            {
+                food: "Baked Beans",
+                cal: "244 cal"
+            },
+            {
+                food: "Baked Chicken",
+                cal: "282 cal"
+            },
+            {
+                food: "BBQ Ribs",
+                cal: "360 cal"
+            },
+            {
+                food: "Beef Stew",
+                cal: "186 cal"
+            },
+            {
+                food: "Biryani",
+                cal: "484 cal"
+            },
+            {
+                food: "Black Pudding",
+                cal: "101 cal"
+            },
+            {
+                food: "Black Rice",
+                cal: "323 cal"
+            },
+            {
+                food: "BLT",
+                cal: "593 cal"
+            },
+            {
+                food: "Brown Rice",
+                cal: "670 cal"
+            },
+            {
+                food: "Burrito",
+                cal: "326 cal"
+            },
+            {
+                food: "Butter Chicken",
+                cal: "490 cal"
+            },
+            {
+                food: "California Roll",
+                cal: "33 cal"
+            },
+            {
+                food: "Chicken Caesar Salad",
+                cal: "392 cal"
+            },
+            {
+                food: "Chicken Fried Steak",
+                cal: "423 cal"
+            },
+            {
+                food: "Chicken Marsala",
+                cal: "2209 cal"
+            },
+            {
+                food: "Chicken Parmesan",
+                cal: "250 cal"
+            },
+            {
+                food: "Chicken Pot Pie",
+                cal: "673 cal"
+            },
+            {
+                food: "Chicken Tikka Masala",
+                cal: "195 cal"
+            },
+            {
+                food: "Chili con Carne",
+                cal: "266 cal"
+            },
+            {
+                food: "Chimichanga",
+                cal: "418 cal"
+            },
+            {
+                food: "Cobb Salad",
+                cal: "632 cal"
+            },
+            {
+                food: "Collard Greens",
+                cal: "13 cal"
+            },
+            {
+                food: "Corn Dog",
+                cal: "438 cal"
+            },
+            {
+                food: "Corned Beef Hash",
+                cal: "349 cal"
+            },
+            {
+                food: "Cottage Pie",
+                cal: "523 cal"
+            },
+            {
+                food: "Dal",
+                cal: "304 cal"
+            },
+            {
+                food: "Deviled Eggs",
+                cal: "62 cal"
+            },
+            {
+                food: "Dim Sum",
+                cal: "37 cal"
+            },
+            {
+                food: "Dosa",
+                cal: "287 cal"
+            },
+            {
+                food: "Enchiladas",
+                cal: "323 cal"
+            },
+            {
+                food: "Fajita",
+                cal: "290 cal"
+            },
+            {
+                food: "Fish and Chips",
+                cal: "585 cal"
+            },
+            {
+                food: "Fried Rice",
+                cal: "662 cal"
+            },
+            {
+                food: "Fried Shrimp",
+                cal: "75 cal"
+            },
+            {
+                food: "Grilled Cheese Sandwich",
+                cal: "392 cal"
+            },
+            {
+                food: "Ham and Cheese Sandwich",
+                cal: "352 cal"
+            },
+            {
+                food: "Hummus",
+                cal: "435 cal"
+            },
+            {
+                food: "Jambalaya",
+                cal: "250 cal"
+            },
+            {
+                food: "Kebab",
+                cal: "774 cal"
+            },
+            {
+                food: "Lasagne",
+                cal: "284 cal"
+            },
+            {
+                food: "Mac and Cheese",
+                cal: "699 cal"
+            },
+            {
+                food: "Macaroni and Cheese",
+                cal: "699 cal"
+            },
+            {
+                food: "Mashed Potatoes",
+                cal: "174 cal"
+            },
+            {
+                food: "Meat Pie",
+                cal: "290 cal"
+            },
+            {
+                food: "Meatloaf",
+                cal: "721 cal"
+            },
+            {
+                food: "Naan",
+                cal: "260 cal"
+            },
+            {
+                food: "Orange Chicken",
+                cal: "420 cal"
+            },
+            {
+                food: "Pad Thai",
+                cal: "375 cal"
+            },
+            {
+                food: "Paella",
+                cal: "200 cal"
+            },
+            {
+                food: "Paratha",
+                cal: "260 cal"
+            },
+            {
+                food: "Pea Soup",
+                cal: "190 cal"
+            },
+            {
+                food: "Peanut Butter Sandwich",
+                cal: "200 cal"
+            },
+            {
+                food: "Peking Duck",
+                cal: "401 cal"
+            },
+            {
+                food: "Philly Cheese Steak",
+                cal: "300 cal"
+            },
+            {
+                food: "Pizza",
+                cal: "272 cal"
+            },
+            {
+                food: "Pork Chop",
+                cal: "295 cal"
+            },
+            {
+                food: "Potato Salad",
+                cal: "136 cal"
+            },
+            {
+                food: "Pulled Pork Sandwich",
+                cal: "551 cal"
+            },
+            {
+                food: "Ramen",
+                cal: "380 cal"
+            },
+            {
+                food: "Ravioli",
+                cal: "134 cal"
+            },
+            {
+                food: "Reuben Sandwich",
+                cal: "641 cal"
+            },
+            {
+                food: "Roast Beef",
+                cal: "23 cal"
+            },
+            {
+                food: "Roast Dinner",
+                cal: "240 cal"
+            },
+            {
+                food: "Samosa",
+                cal: "107 cal"
+            },
+            {
+                food: "Sausage Roll",
+                cal: "361 cal"
+            },
+            {
+                food: "Sausage Rolls",
+                cal: "101 cal"
+            },
+            {
+                food: "Shepherds Pie",
+                cal: "159 cal"
+            },
+            {
+                food: "Shrimp Cocktail",
+                cal: "130 cal"
+            },
+            {
+                food: "Sloppy Joe",
+                cal: "101 cal"
+            },
+            {
+                food: "Sloppy Joes",
+                cal: "397 cal"
+            },
+            {
+                food: "Spaghetti Bolognese",
+                cal: "374 cal"
+            },
+            {
+                food: "Spring Roll",
+                cal: "350 cal"
+            },
+            {
+                food: "Spring Rolls",
+                cal: "350 cal"
+            },
+            {
+                food: "Taco",
+                cal: "213 cal"
+            },
+            {
+                food: "Tandoori Chicken",
+                cal: "198 cal"
+            },
+            {
+                food: "Yorkshire Pudding",
+                cal: "83 cal"
+            },
+            {
+                food: "Alphabet Soup",
+                cal: "62 cal"
+            },
+            {
+                food: "Bean Stew",
+                cal: "335 cal"
+            },
+            {
+                food: "Beef Bouillon",
+                cal: "7 cal"
+            },
+            {
+                food: "Beef Noodle Soup",
+                cal: "83 cal"
+            },
+            {
+                food: "Beef Soup",
+                cal: "70 cal"
+            },
+            {
+                food: "Bouillon",
+                cal: "39 cal"
+            },
+            {
+                food: "Broccoli Cheese Soup",
+                cal: "264 cal"
+            },
+            {
+                food: "Broccoli Soup",
+                cal: "206 cal"
+            },
+            {
+                food: "Cabbage Soup",
+                cal: "69 cal"
+            },
+            {
+                food: "Carrot Ginger Soup",
+                cal: "95 cal"
+            },
+            {
+                food: "Carrot Soup",
+                cal: "95 cal"
+            },
+            {
+                food: "Chicken Bouillon",
+                cal: "10 cal"
+            },
+            {
+                food: "Chicken Broth",
+                cal: "39 cal"
+            },
+            {
+                food: "Chicken Gumbo Soup",
+                cal: "56 cal"
+            },
+            {
+                food: "Chicken Noodle Soup",
+                cal: "62 cal"
+            },
+            {
+                food: "Chicken Stock",
+                cal: "39 cal"
+            },
+            {
+                food: "Chicken Vegetable Soup",
+                cal: "77 cal"
+            },
+            {
+                food: "Chicken with Rice Soup",
+                cal: "58 cal"
+            },
+            {
+                food: "Cream of Asparagus Soup",
+                cal: "85 cal"
+            },
+            {
+                food: "Cream of Broccoli Soup",
+                cal: "140 cal"
+            },
+            {
+                food: "Cream of Celery Soup",
+                cal: "92 cal"
+            },
+            {
+                food: "Cream of Chicken Soup",
+                cal: "117 cal"
+            },
+            {
+                food: "Cream of Mushroom Soup",
+                cal: "97 cal"
+            },
+            {
+                food: "Cream of Onion Soup",
+                cal: "107 cal"
+            },
+            {
+                food: "Cream of Potato Soup",
+                cal: "73 cal"
+            },
+            {
+                food: "Creamy Chicken Noodle Soup",
+                cal: "56 cal"
+            },
+            {
+                food: "French Onion Soup",
+                cal: "56 cal"
+            },
+            {
+                food: "Golden Mushroom Soup",
+                cal: "161 cal"
+            },
+            {
+                food: "Goulash",
+                cal: "1887 cal"
+            },
+            {
+                food: "Instant Ramen",
+                cal: "371 cal"
+            },
+            {
+                food: "Lentil Soup",
+                cal: "139 cal"
+            },
+            {
+                food: "Lobster Bisque Soup",
+                cal: "248 cal"
+            },
+            {
+                food: "Meatball Soup",
+                cal: "120 cal"
+            },
+            {
+                food: "Minestrone",
+                cal: "82 cal"
+            },
+            {
+                food: "Mushroom Soup",
+                cal: "85 cal"
+            },
+            {
+                food: "Noodle Soup",
+                cal: "83 cal"
+            },
+            {
+                food: "Onion Soup",
+                cal: "56 cal"
+            },
+            {
+                food: "Oxtail Soup",
+                cal: "68 cal"
+            },
+            {
+                food: "Pea Soup",
+                cal: "190 cal"
+            },
+            {
+                food: "Potato Soup",
+                cal: "192 cal"
+            },
+            {
+                food: "Pumpkin Soup",
+                cal: "71 cal"
+            },
+            {
+                food: "Ramen",
+                cal: "371 cal"
+            },
+            {
+                food: "Scotch Broth",
+                cal: "80 cal"
+            },
+            {
+                food: "Succotash",
+                cal: "221 cal"
+            },
+            {
+                food: "Thai Soup",
+                cal: "147 cal"
+            },
+            {
+                food: "Tomato Rice Soup",
+                cal: "116 cal"
+            },
+            {
+                food: "Tomato Soup",
+                cal: "74 cal"
+            },
+            {
+                food: "Vegetable Beef Soup",
+                cal: "76 cal"
+            },
+            {
+                food: "Vegetable Broth",
+                cal: "12 cal"
+            },
+            {
+                food: "Vegetable Soup",
+                cal: "67 cal"
+            },
+            {
+                food: "Vegetable Stock",
+                cal: "12 cal"
+            },
+            {
+                food: "Wedding Soup",
+                cal: "130 cal"
+            },
+            {
+                food: "Baskin-Robbins",
+                cal: "170 cal"
+            },
+            {
+                food: "Ben and Jerry’s",
+                cal: "210 cal"
+            },
+            {
+                food: "Butter Pecan Ice Cream",
+                cal: "280 cal"
+            },
+            {
+                food: "Carvel",
+                cal: "449 cal"
+            },
+            {
+                food: "Chocolate Chip Ice Cream",
+                cal: "155 cal"
+            },
+            {
+                food: "Chocolate Ice Cream",
+                cal: "156 cal"
+            },
+            {
+                food: "Ciao Bella",
+                cal: "240 cal"
+            },
+            {
+                food: "Coffee Ice Cream",
+                cal: "170 cal"
+            },
+            {
+                food: "Cold Stone Creamery",
+                cal: "329 cal"
+            },
+            {
+                food: "Cookie Dough Ice Cream",
+                cal: "130 cal"
+            },
+            {
+                food: "Crunchie McFlurry",
+                cal: "318 cal"
+            },
+            {
+                food: "Dairy Milk McFlurry",
+                cal: "340 cal"
+            },
+            {
+                food: "Dippin Dots",
+                cal: "381 cal"
+            },
+            {
+                food: "Double Rainbow",
+                cal: "185 cal"
+            },
+            {
+                food: "Drumsticks",
+                cal: "360 cal"
+            },
+            {
+                food: "French Vanilla Ice Cream",
+                cal: "145 cal"
+            },
+            {
+                food: "Friendly’s",
+                cal: "140 cal"
+            },
+            {
+                food: "Healthy Choice",
+                cal: "80 cal"
+            },
+            {
+                food: "Hot Fudge Sundae",
+                cal: "333 cal"
+            },
+            {
+                food: "Ice Cream Sandwich",
+                cal: "265 cal"
+            },
+            {
+                food: "Ice Cream Sundae",
+                cal: "253 cal"
+            },
+            {
+                food: "Ice Milk",
+                cal: "164 cal"
+            },
+            {
+                food: "Magnolia",
+                cal: "166 cal"
+            },
+            {
+                food: "Magnum",
+                cal: "258 cal"
+            },
+            {
+                food: "Magnum Almond",
+                cal: "271 cal"
+            },
+            {
+                food: "Magnum Double Caramel",
+                cal: "305 cal"
+            },
+            {
+                food: "Magnum Double Chocolate",
+                cal: "327 cal"
+            },
+            {
+                food: "Magnum Gold",
+                cal: "290 cal"
+            },
+            {
+                food: "Magnum White",
+                cal: "255 cal"
+            },
+            {
+                food: "McFlurry",
+                cal: "205 cal"
+            },
+            {
+                food: "McFlurry Oreo",
+                cal: "340 cal"
+            },
+            {
+                food: "Mini Milk",
+                cal: "30 cal"
+            },
+            {
+                food: "Mint Chocolate Chip Ice Cream",
+                cal: "172 cal"
+            },
+            {
+                food: "Rocky Road Ice Cream",
+                cal: "290 cal"
+            },
+            {
+                food: "Schwan’s",
+                cal: "177 cal"
+            },
+            {
+                food: "Smarties McFlurry",
+                cal: "400 cal"
+            },
+            {
+                food: "Snickers Ice Cream",
+                cal: "180 cal"
+            },
+            {
+                food: "Soft Serve",
+                cal: "191 cal"
+            },
+            {
+                food: "Solero",
+                cal: "75 cal"
+            },
+            {
+                food: "Strawberry Ice Cream",
+                cal: "170 cal"
+            },
+            {
+                food: "Strawberry Sundae",
+                cal: "281 cal"
+            },
+            {
+                food: "Sundae",
+                cal: "155 cal"
+            },
+            {
+                food: "Turkey Hill",
+                cal: "190 cal"
+            },
+            {
+                food: "Vanilla Cone",
+                cal: "230 cal"
+            },
+            {
+                food: "Vanilla Ice Cream",
+                cal: "145 ca"
+            },
+            {
+                food: "Acai Juice",
+                cal: "139 cal"
+            },
+            {
+                food: "Aloe Vera",
+                cal: "106 cal"
+            },
+            {
+                food: "Apple Juice",
+                cal: "110 cal"
+            },
+            {
+                food: "Apricot Nectar",
+                cal: "134 cal"
+            },
+            {
+                food: "Banana Juice",
+                cal: "120 cal"
+            },
+            {
+                food: "Blackberry Juice",
+                cal: "115 cal"
+            },
+            {
+                food: "Boysenberry Juice",
+                cal: "130 cal"
+            },
+            {
+                food: "Capri-Sun",
+                cal: "82 cal"
+            },
+            {
+                food: "Carrot Juice",
+                cal: "96 cal"
+            },
+            {
+                food: "Chamomile Tea",
+                cal: "0 cal"
+            },
+            {
+                food: "Cherry Juice",
+                cal: "108 cal"
+            },
+            {
+                food: "Clamato",
+                cal: "144 cal"
+            },
+            {
+                food: "Coconut Milk",
+                cal: "559 cal"
+            },
+            {
+                food: "Coconut Water",
+                cal: "46 cal"
+            },
+            {
+                food: "Concord Grape",
+                cal: "170 cal"
+            },
+            {
+                food: "Cranberry Apple Juice",
+                cal: "161 cal"
+            },
+            {
+                food: "Cranberry Grape Juice",
+                cal: "170 cal"
+            },
+            {
+                food: "Cranberry Juice",
+                cal: "110 cal"
+            },
+            {
+                food: "Cucumber Juice",
+                cal: "24 cal"
+            },
+            {
+                food: "Currant Juice",
+                cal: "115 cal"
+            },
+            {
+                food: "Energy-Drink",
+                cal: "309 cal"
+            },
+            {
+                food: "Fruitopia",
+                cal: "264 cal"
+            },
+            {
+                food: "Grape Juice",
+                cal: "144 cal"
+            },
+            {
+                food: "Grapefruit Juice",
+                cal: "110 cal"
+            },
+            {
+                food: "Lemon Juice",
+                cal: "50 cal"
+            },
+            {
+                food: "Lemonade",
+                cal: "120 cal"
+            },
+            {
+                food: "Lime Juice",
+                cal: "50 cal"
+            },
+            {
+                food: "Limeade",
+                cal: "307 cal"
+            },
+            {
+                food: "Mango Lassi",
+                cal: "158 cal"
+            },
+            {
+                food: "Nestea",
+                cal: "50 cal"
+            },
+            {
+                food: "Orange Juice",
+                cal: "110 cal"
+            },
+            {
+                food: "Papaya Juice",
+                cal: "139 cal"
+            },
+            {
+                food: "Passion Fruit Juice",
+                cal: "115 cal"
+            },
+            {
+                food: "Peach Juice",
+                cal: "130 cal"
+            },
+            {
+                food: "Peach Nectar",
+                cal: "130 cal"
+            },
+            {
+                food: "Pear Juice",
+                cal: "144 cal"
+            },
+            {
+                food: "Pear Nectar",
+                cal: "144 cal"
+            },
+            {
+                food: "Pineapple Juice",
+                cal: "127 cal"
+            },
+            {
+                food: "Pineapple Orange Juice",
+                cal: "120 cal"
+            },
+            {
+                food: "Plum Juice",
+                cal: "170 cal"
+            },
+            {
+                food: "Pomegranate Juice",
+                cal: "158 cal"
+            },
+            {
+                food: "Sauerkraut Juice",
+                cal: "34 cal"
+            },
+            {
+                food: "Tangerine Juice",
+                cal: "103 cal"
+            },
+            {
+                food: "Tomato Juice",
+                cal: "41 cal"
+            },
+            {
+                food: "Vegetable Juice",
+                cal: "50 cal"
+            },
+            {
+                food: "White Grape Juice",
+                cal: "180 cal"
+            },
+            {
+                food: "Burrito",
+                cal: "206 cal"
             }
-           document.getElementById('abc').innerHTML = str;
-            </script>
+        ]
+        var str = '', a = 'a', count = 0;
+        var food = getStorage('food');
+        data.map(d => {
+            if (d.food.toLowerCase().includes(food)) {
+                str += `<li class="list-group-item" id="${a}" onclick="takeCalorie('${d.cal}','${a}')">${d.food} : ${d.cal}</li>`;
+                a = a + 'a';
+                count++;
+            }
+        })
+        a = '';
+        if (count == 0) {
+            alert("Coudnt recognize plz upload again ")
+            window.location.href = "index.html"
+        }
+        document.getElementById('abc').innerHTML = str;
+    </script>
 </body>
+
 </html>
