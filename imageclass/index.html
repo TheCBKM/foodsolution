@@ -27,6 +27,7 @@
 
             // Make a prediction through the model on our image.
             const imgEl = document.getElementById('img');
+            alert(imgEl.src)
             const result = await net.classify(imgEl);
             alert(JSON.stringify(result));
         }
