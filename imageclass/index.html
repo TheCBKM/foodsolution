@@ -11,7 +11,9 @@
     <div id="console"></div>
     wow
     <!-- Add an image that we will use to test -->
-    <img id="img"  src="banna.png" width=227 height=227 />
+    <!-- <img id="img"  src="banna.png" width=227 height=227 /> -->
+    <input type="file" id="img">
+    <button onclick="app()">check</button>
     <!-- Load index.js after the content of the page -->
     <script>
         let net;
@@ -28,7 +30,7 @@
             const result = await net.classify(imgEl);
             alert(JSON.stringify(result));
         }
-        app()
+       
 
         </script>
 
