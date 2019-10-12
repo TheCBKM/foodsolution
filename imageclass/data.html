@@ -50,7 +50,7 @@
         function estimateCalo(x){
             alert(x);
             if(x==1){
-                cpd = cpd + burn - tbtcalorie;
+                cpd = cpd + burn - Number(tbtcalorie.split(' ')[0])                ;
                
             }else{
                 cpd = cpd + burn;
