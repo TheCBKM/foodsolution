@@ -30,7 +30,7 @@
     <!-- Load index.js after the content of the page -->
     <script>
         let net;
-
+        var food;
         async function app() {
             console.log('Loading mobilenet..');
 
@@ -41,7 +41,10 @@
             // Make a prediction through the model on our image.
             img = document.getElementById('output')
             const result = await net.classify(img);
-            alert(JSON.stringify(result));
+            food = result;
+            setStorage('food',food[0].className);
+            window.location.href = 'data.html';
+            //alert(getStorage('food'));
         }
        
 
