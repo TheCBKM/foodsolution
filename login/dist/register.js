@@ -11,16 +11,16 @@ function register(){
     if(name && phn && age && ht && wt && pwd){
          var phoneno = /^\d{10}$/;
          if(phn.match(phoneno)){
-             alert('correct phn');
+            //  alert('correct phn');
              if(document.getElementById('m').checked){
                 gender = 'm';
                 bmr = (10*wt) + ((6.25 * 30.48 * ht) - (5 * age) + 5)
-                alert("your bmr is bmr male: "+bmr);
+                // alert("your bmr is bmr male: "+bmr);
             }
             else{
                 gender = 'f';
                 bmr = (10*wt) + ((6.25 * 30.48 * ht) - (5 * age) - 161)
-                alert("your bmr is bmr female: "+bmr);
+                // alert("your bmr is bmr female: "+bmr);
             }
 
             axios.post('https://foodsolutions-versionbeta.herokuapp.com/user/register',{
@@ -67,7 +67,7 @@ function register(){
 function login(){
     phn = document.getElementById('phn1').value;
     pwd = document.getElementById('pwd1').value;
-    alert(phn +'-->'+pwd);
+    // alert(phn +'-->'+pwd);
     var phoneno = /^\d{10}$/;
     if(phn.match(phoneno)){
         axios.post('https://foodsolutions-versionbeta.herokuapp.com/user/login',{
@@ -77,7 +77,7 @@ function login(){
         .then(res=>{
             console.log(res.data.data[0]);
             if(res.data.success){
-                alert('login successfull');
+                // alert('login successfull');
                 setStorage('user',res.data.data[0]);
                 window.location.href = '../../index.html'
             }else{

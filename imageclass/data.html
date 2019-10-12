@@ -12,7 +12,7 @@
     <title>data</title>
   </head>
   <body>
-        <div class="p-3 mb-2 bg-danger text-white" style="text-align: center;">Select the food which is likely to be: </div>
+        <div class="p-3 mb-2 bg-danger text-white"  style="text-align: center;">Select the food which is likely to be: </div>
     <ul class="list-group mb-2" id="abc">
         
       </ul>
@@ -50,18 +50,16 @@
         function estimateCalo(x){
             alert(x);
             if(x==1){
-                cpd = cpd + burn - Number(tbtcalorie.split(' ')[0])                ;
+                cpd = cpd + burn - Number(tbtcalorie.split(' ')[0]);
                
             }else{
                 cpd = cpd + burn;
                
             }
         
-            alert(JSON.stringify({
-                user : user._id,
-                humandata : humandata,
-                caltaken : cpd
-            }))
+         if(cpd>0){
+             
+         
             axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/set',{
                 user : user._id,
                 humandata : humandata,
@@ -71,6 +69,10 @@
                 console.log(res)
             })
         }
+        else{
+            alert("This food seems to be un healthy do not eat it ")
+        }
+    }
 
         function vanishColor(){
             var a = 'a';
@@ -2112,6 +2114,10 @@
                 {
                     food: "White Grape Juice",
                     cal: "180 cal"
+                },
+                {
+                    food: "Burrito",
+                    cal: "206 cal"
                 }
             ]
             var str = '', a='a', count=0;
@@ -2124,6 +2130,10 @@
                }
             })
             a = '';
+            if(count==0){
+                alert("Coudnt recognize plz upload again ")
+                window.location.href="index.html"
+            }
            document.getElementById('abc').innerHTML = str;
             </script>
 </body>
