@@ -39,12 +39,13 @@
             console.log('Successfully loaded model');
 
             // Make a prediction through the model on our image.
-            img = document.getElementById('output')
+            img = document.getElementById('output');
             const result = await net.classify(img);
             alert(JSON.stringify(result));
-            food = result;
-            setStorage('food',food[0].className);
-            window.location.href = 'data.html';
+            alert('done');
+           // food = result;
+           // setStorage('food',food[0].className);
+           // window.location.href = 'data.html';
             //alert(getStorage('food'));
         }
        
