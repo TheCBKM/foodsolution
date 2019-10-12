@@ -21,6 +21,14 @@
     <center>
         <button type="button" onclick="estimateCalo(1)" class="btn btn-outline-success">Yes</button>
         <button type="button" onclick="estimateCalo(2)" class="btn btn-outline-success">No</button>
+        <ul class="list-group mb-2">
+            <li class="list-group-item"> Please eat less Pizza it contains 300-500 cal </li>
+            <li class="list-group-item"> Burgers contains 500-600 cal </li>
+            <li class="list-group-item"> Eat fruits and exercise Daily </li>
+
+
+
+        </ul>
     </center>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -2129,7 +2137,7 @@
                 cal: "206 cal"
             }
         ]
-        var str = '', a = 'a', count = 0;
+        var str = '',  a = 'a', count = 0;
         var food = getStorage('food');
         data.map(d => {
             if (d.food.toLowerCase().includes(food)) {
