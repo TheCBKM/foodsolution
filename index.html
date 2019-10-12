@@ -1,44 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="manifest" href="manifest.json">
-    <!-- link rel="stylesheet" href="styles.css" -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
 
-    <title>Mi Band 2</title>
-  </head>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="manifest" href="manifest.json">
+  <!-- link rel="stylesheet" href="styles.css" -->
+  <style>
+  .myButton {
+	background-color:#000000;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+	background-color:#000000;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
 
-  <body>
-    <a href="https://github.com/vshymanskyy/miband-js">
-      <img class="fork-me" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub">
-    </a>
+    
 
+  </style>
+  <title>Mi Band 2</title>
+</head>
+
+<body
+  style="background-image: url(walpaper.png) ; background-repeat: no-repeat; font-family: 'Courier New', Courier, monospace">
+  <center>
     <header>
-        <h1>
-          <a href="https://github.com/vshymanskyy/miband-js">
-            <span class="h1-left">MiBand</span>
-            <span class="h1-right">JS</span>
-          </a>
-        </h1>
-        <button id="scanBtn" class="btn-scan">Scan</button>
+      <h1 style="color: aliceblue">
+        Please Connect
+        MiBand
+
+      </h1>
+      <button id="scanBtn" class="btn-scan myButton">Scan</button>
+   
     </header>
 
-    <main style="display: none;">
+    <main style="font-family: 'Courier New', Courier, monospace;font-size: 15px; color: red">
       <pre id="output"></pre>
     </main>
+  </center>
 
-    <script src="webapp.bundle.js"></script>
+  <script src="webapp.bundle.js"></script>
 
-    <script>
+  <script>
       // Install service worker - for offline support (not working properly, so disabled)
-      /*if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('serviceworker.js');
-      }*/
-    </script>
-  </body>
+    /*if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('serviceworker.js');
+    }*/
+  </script>
+</body>
+
 </html>
