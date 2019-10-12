@@ -12,7 +12,16 @@
     wow
     <!-- Add an image that we will use to test -->
     <!-- <img id="img"  src="banna.png" width=227 height=227 /> -->
-    <input type="file" id="img">
+    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+    <p><img id="output" width="200" /></p>
+    
+    <script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
     <button onclick="app()">checkk</button>
     <!-- Load index.js after the content of the page -->
     <script>
@@ -26,14 +35,14 @@
             console.log('Successfully loaded model');
 
             // Make a prediction through the model on our image.
-            const imgEl = document.getElementById('img');
-            alert(imgEl.src)
-            const result = await net.classify(imgEl);
+            img = document.getElementById('output')
+            const result = await net.classify(img);
             alert(JSON.stringify(result));
         }
        
 
         </script>
+
 
 </body>
 
