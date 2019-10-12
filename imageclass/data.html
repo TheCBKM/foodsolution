@@ -1,3 +1,4 @@
+<script src="../storage.js"></script>
 <script>
 data= [
         {
@@ -2025,9 +2026,9 @@ data= [
             cal: "180 cal"
         }
     ]
-
+   var food = getStorage('food');    
    data.map(d=>{
-       if(d.food.toLowerCase().includes("cucumber"))
-       console.log(d)
+       if(d.food.toLowerCase().includes(food))
+       alert(d.food);
    })
     </script>

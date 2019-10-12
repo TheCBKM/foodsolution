@@ -3,11 +3,13 @@
 <head>
     <!-- Load the latest version of TensorFlow.js -->
     <!-- <script src="https://unpkg.com/@tensorflow/tfjs"></script> -->
+    <script src="../storage.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
 </head>
 
 <body>
+        
     <div id="console"></div>
     wow
     <!-- Add an image that we will use to test -->
@@ -17,6 +19,7 @@
     <p><img id="output" width="200" /></p>
     
     <script>
+        alert(getStorage('humandata'));
     var loadFile = function(event) {
         console.log(event)
         var image = document.getElementById('output');
@@ -27,7 +30,7 @@
     <!-- Load index.js after the content of the page -->
     <script>
         let net;
-
+        var food;
         async function app() {
             console.log('Loading mobilenet..');
 
@@ -36,9 +39,14 @@
             console.log('Successfully loaded model');
 
             // Make a prediction through the model on our image.
-            img = document.getElementById('output')
+            img = document.getElementById('output');
             const result = await net.classify(img);
             alert(JSON.stringify(result));
+            alert('done');
+           // food = result;
+           // setStorage('food',food[0].className);
+           // window.location.href = 'data.html';
+            //alert(getStorage('food'));
         }
        
 
