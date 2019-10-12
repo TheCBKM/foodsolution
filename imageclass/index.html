@@ -1,58 +1,102 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-    <!-- Load the latest version of TensorFlow.js -->
-    <!-- <script src="https://unpkg.com/@tensorflow/tfjs"></script> -->
-    <script src="../storage.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+        <script src="../storage.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
-</head>
 
-<body>
-        
+  </head>
+  <body style="background-image: url(bg.jpg); height: 100%;background-position: center;background-repeat: repeat;">
+    <center><h1 style="font-family:courier new;color:yellow;"><b>Can You Eat IT?</b></h1></center>
+
+
     <div id="console"></div>
-    wow
+    
     <!-- Add an image that we will use to test -->
     <!-- <img id="img"  src="banna.png" width=227 height=227 /> -->
-    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-    <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
-    <p><img id="output" width="200" /></p>
+<center>
+<div class="p-4 ">
+  <input  class="btn btn-dark" type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none; "/>
+  <!-- <button type="button" class="btn btn-dark">Upload</button>
+ -->
+
     
+    <p><label for="file" class="btn btn-dark" style="cursor: pointer;">Upload Image</label></p>
+    </div>
+    <p><img id="output" width="400" /></p>
+    
+  </center>
     <script>
-        alert(getStorage('humandata'));
+        // alert(getStorage('humandata'));
     var loadFile = function(event) {
         console.log(event)
         var image = document.getElementById('output');
         image.src = URL.createObjectURL(event.target.files[0]);
     };
     </script>
-    <button onclick="app()">checkk</button>
+    <center>
+    <!-- <button type="button" class="btn btn-success" onclick="app()">Check</button> -->
     <!-- Load index.js after the content of the page -->
+    
+    <!-- Example single danger button -->
+    
+<div class="btn-group ">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select Your Lifestyle
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" onclick="app(1.2)" href="#">Sedentary</a>
+    <a class="dropdown-item" onclick="app(1.375)" href="#">Light Active</a>
+    <a class="dropdown-item" onclick="app(1.55)" href="#">Moderate Active</a>
+    <a class="dropdown-item" onclick="app(1.725)" href="#">Very Active</a>
+    <a class="dropdown-item" onclick="app(1.9)" href="#">Super Active</a>    
+</div>
+</div>
+</center>
     <script>
         let net;
         var food;
-        async function app() {
+        var cpd;
+        var user = getStorage('user');
+        async function app(x) {
+            cpd = user.bmr * x;
             console.log('Loading mobilenet..');
-
             // Load the model.
             net = await mobilenet.load();
             console.log('Successfully loaded model');
-
             // Make a prediction through the model on our image.
             img = document.getElementById('output');
             const result = await net.classify(img);
             alert(JSON.stringify(result));
             alert('done');
-           // food = result;
-           // setStorage('food',food[0].className);
-           // window.location.href = 'data.html';
-            //alert(getStorage('food'));
-        }
+            food = result;
+            setStorage('food',food[0].className);
+            setStorage('cpd',cpd);
+            window.location.href = 'data.html';
+ 
+           //alert(getStorage('food'));
+        }   
        
-
         </script>
 
 
-</body>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
+
+
+
+
+
