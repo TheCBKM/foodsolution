@@ -56,7 +56,7 @@
         var burn = humandata.calories - purani;
         var tbtcalorie;
         function estimateCalo(x) {
-            alert(x);
+            // alert(x);
             if (x == 1) {
                 cpd = cpd + burn - Number(tbtcalorie.split(' ')[0]);
 
@@ -71,7 +71,8 @@
                 axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/set', {
                     user: user._id,
                     humandata: humandata,
-                    caltaken: cpd
+                    caltaken: cpd,
+
                 })
                     .then(res => {
                         console.log(res)

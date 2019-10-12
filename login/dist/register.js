@@ -74,6 +74,7 @@ function login(){
             phone : phn,
             pass : pwd
         })
+        
         .then(res=>{
             console.log(res.data.data[0]);
             if(res.data.success){

@@ -18,7 +18,7 @@ function setup() {
 
 // A function to run when we get any errors and the results
 function gotResult(error, results) {
-    alert("result")
+    // alert("result")
     // Display error in the console
     if (error) {
         console.error(error);
