@@ -7658,7 +7658,9 @@
 
               let ped = await miband.getPedometerStats();
               log('Pedometer:', JSON.stringify(ped));
-              alert(JSON.stringify(ped))
+              setStorage('humandata',JSON.stringify(ped));
+              alert(JSON.stringify(ped));
+              window.location.href = 'imageclass/index.html';
 
               // log('Notifications demo...');
               // await miband.showNotification('message');

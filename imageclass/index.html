@@ -3,11 +3,13 @@
 <head>
     <!-- Load the latest version of TensorFlow.js -->
     <!-- <script src="https://unpkg.com/@tensorflow/tfjs"></script> -->
+    <script src="../storage.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
 </head>
 
 <body>
+        
     <div id="console"></div>
     wow
     <!-- Add an image that we will use to test -->
@@ -17,6 +19,7 @@
     <p><img id="output" width="200" /></p>
     
     <script>
+        alert(getStorage('humandata'));
     var loadFile = function(event) {
         console.log(event)
         var image = document.getElementById('output');
