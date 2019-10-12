@@ -56,9 +56,15 @@
                 cpd = cpd + burn;
                
             }
+        
+            alert(JSON.stringify({
+                user : user._id,
+                humandata : humandata,
+                caltaken : cpd
+            }))
             axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/set',{
                 user : user._id,
-                humandata : updhumandata,
+                humandata : humandata,
                 caltaken : cpd
             })
             .then(res=>{

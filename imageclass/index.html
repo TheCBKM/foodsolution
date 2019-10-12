@@ -67,6 +67,7 @@
         var cpd;
         var user = getStorage('user');
         async function app(x) {
+          alert("load")
             cpd = user.bmr * x;
             console.log('Loading mobilenet..');
             // Load the model.
