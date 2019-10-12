@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Facts</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="./style.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const getStorage = (item) => (JSON.parse(sessionStorage.getItem(item)))
+    const setStorage = (item, data) => (sessionStorage.setItem(item, JSON.stringify(data)))
+    const removeStorage = (item) => (sessionStorage.removeItem(item))
+user = getStorage('user');
+axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/gettoday',{
+  user:user._id
+})
+.then(res=>{
+  console.log(res);
+  length = res.data.event.length;
+  burn = res.data.event[length-1].humandata.calories;
+  caltaken = res.data.event[length-1].caltaken;
+  document.getElementById('c11').innerHTML = (user.bmr * 1.5);
+  document.getElementById('c21').innerHTML = burn;
+  document.getElementById('c31').innerHTML = (user.bmr * 1.5) - burn;
+})
+.catch(e=>{
+  console.log(e)
+})
+</script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class='widget'>
+  <header>
+    <h3>Analysis</h3>
+  </header>
+  <div class='chart'>
+    <div class='controls'>
+      <nav>
+        <a href='javascript:void(0);'>This week<span class='fa fa-angle-down fa-lg'></span></a>
+      </nav>
+      <div>
+        <span class='fa fa-caret-up fa-lg'>&nbsp;&nbsp;</span>
+        <span>27%</span>
+      </div>
+    </div>
+    <div class='canvas-container'>
+      <canvas id='c1'></canvas>
+    </div>
+  </div>
+  <div class='info'>
+    <h4>Your Analysis:</h4>
+    <div class='info-module'>
+      <div class='heading'>
+        <span>Calorie Per Day</span>
+        <span id="c11">loading...</span>
+      </div>
+      <div class='progress undergraduate'></div>
+    </div>
+    <div class='info-module'>
+      <div class='heading'>
+        <span>Calorie Burn</span>
+        <span id="c21">loading...</span>
+      </div>
+      <div class='progress graduate'></div>
+    </div>
+    <div class='info-module'>
+      <div class='heading'>
+        <span>Calorie Required</span>
+        <span id="c31">loading...</span>
+      </div>
+      <div class='progress transfer'></div>
+    </div>
+    <nav>
+      <a href='javascript:void(0);'><span data-toggle="modal" data-target="#exampleModal">View other features</span><span class='fa fa-refresh fa-lg'></span></a>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Features</h5> 
+        
+      </div>
+      <div class="modal-body">
+        <center>
+        <button type="button" onclick="window.location.href='../../bmi.html';" class="btn btn-primary">BMI Calculator</button>
+        <button type="button" onclick="window.location.href='../../health.html';" class="btn btn-success">Health Tips</button>
+      </center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </nav>
+  </div>
+</div>
+<!-- partial -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/chart.min.js'></script>
+<script  src="./script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+/* The version of Bourbon used in this Pen was 4.* */
+@import "bourbon";
+
+@mixin MQ {
+	@media only screen and (min-width: 600px) { @content; }
+}
+
+* {
+	@include box-sizing(border-box);
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/body_bg.jpg') no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
+.widget {
+  width: 90%;
+	max-width: 600px;
+	margin: 3em auto;
+	-webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.25);
+	-moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.25);
+	box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.25);
+	@include clearfix;
+
+  header {
+		background: #144c88;
+		padding: 1em 1.5em;
+		border-top: 4px solid #7dd343;
+		color: #fff;
+		h3 {
+			margin: 0;
+			font-size: 1.35em;
+			font-weight: 400;
+		}
+	}
+
+	.chart {
+		width: 100%;
+		height: auto;
+		background: #fff;
+
+		@include MQ {
+			float: right;
+			width: 65%;
+			height: 275px;	
+		}
+
+		.controls {
+			height: 50px;
+			border-bottom: 1px solid #ccc;
+			@include clearfix;
+
+			nav {
+				float: left;
+				width: 75%;
+				line-height: 50px;
+				border-right: 1px solid #ccc;
+
+				a {
+					display: block;
+					padding: 0 1.5em;
+					text-decoration: none;
+					color: #3c3c3c;
+
+					@include MQ {
+						padding: 0 1em;
+					}
+				}
+
+				span {
+					display: inline-block;
+					float: right;
+					line-height: 50px;
+					color: #3797d3;
+				}
+			}
+
+			div {
+				float: left;
+				width: 25%;
+				line-height: 50px;
+				text-align: center;
+
+				span:first-child {
+					color: #7dd343;
+				}
+
+				span:nth-child(2) {
+					font-weight: 600;
+					font-size: 1.35em;
+					color: #3c3c3c;
+				}
+			}		
+		}
+
+		.canvas-container {
+			width: 100%;
+			text-align: center;
+
+			canvas {
+				display: inline;
+				width: 370px;
+				height: 210px;
+				padding: 1em;
+			}
+		}
+	}
+
+	.info {
+		position: relative;
+		width: 100%;
+		height: 275px;
+		background: #20649b;
+		
+		@include MQ {
+			float: left;
+			width: 35%;
+		}
+
+		h4 {
+			margin: 0 0 0.35em;
+			padding: 1em 1.5em;
+			font-size: 1em;
+			font-weight: 300;
+			text-transform: uppercase;
+			color: #fff;
+		}
+
+		.info-module {
+			padding: 0 1.5em;
+			font-weight: 400;
+
+			.heading {
+				font-size: 0.85em;
+				@include clearfix;
+
+				span {
+					display: inline-block;
+					color: #fff;
+
+					&:first-child {
+						float: left;
+					}
+
+					&:nth-child(2) {
+						float: right;
+					}
+				}
+			}
+
+			.progress {
+				height: 5px;
+				margin: 0.35em 0 1em;
+			    background: #0f3d77;
+			    border-radius: 10px;
+			    &:after {
+			    	content: '';
+			    	display: block;
+			    	height: 100%;
+			    	background: #45b0e6;
+			    	border-radius: 5px;			    	
+			    }
+			}
+
+			.undergraduate:after {
+				width: 65%;
+			    @include animation(undergraduate 2.0s ease-in-out forwards);
+			}
+
+			.graduate:after {
+				width: 30%;
+			    @include animation(graduate 2.0s ease-in-out forwards);
+			}
+
+			.transfer:after {
+				width: 5%;
+			    @include animation(transfer 2.0s ease-in-out forwards);
+			}
+
+			@include keyframes(undergraduate) {
+				0% { width: 0; }
+				100% { width: 65%; }		
+			}
+
+			@include keyframes(graduate) {
+				0% { width: 0; }
+				100% { width: 30%; }
+			}
+
+			@include keyframes(transfer) {
+				0% { width: 0; }
+				100% { width: 5%; }		
+			}			
+			
+		}
+
+		nav {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+
+			a {
+				display: block;
+				line-height: 50px;
+				text-decoration: none;
+				text-align: center;
+				color: #fff;
+			}
+
+			span:first-child {
+				float: left;
+				width: 75%;
+				background: #49b4e8;
+			}
+
+			span:nth-child(2) {
+				float: left;
+				width: 25%;
+				line-height: 50px;
+				background: #3099dd;
+			}
+		}
+
+	}
+}
