@@ -6,7 +6,7 @@ var data = {
             strokeColor : "rgba(0,0,0,0.25)",
             pointColor : "rgba(255,255,255,1)",
             pointStrokeColor : "#fe9d37",
-            data : [135,185,225,385,275,215,265]
+            data : [135,185,225,300,275,215,265]
         }
     ]
 }
@@ -26,7 +26,7 @@ var options = {
     scaleStepWidth : 100,
     responsive : true,
     showTooltips: true,
-    tooltipTemplate: "<%= value %>Kcal " + "Max. Calorie this week",
+    tooltipTemplate: "<%= value %>0 cal " + "Max. Calorie this week",
     tooltipFontSize: 16,
     tooltipYPadding: 12,
     tooltipXPadding: 12,

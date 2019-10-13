@@ -20,22 +20,27 @@
     </script>
 </head>
 
-<body>
-    <div class="p-1 mb-2 bg-primary text-white" style="text-align: center; font-size:30px;" onclick="logout()">Logout
+<body style="background-color:rgb(206, 198, 198) ;">
+    <div class="p-1  mb-0 bg-primary text-white" style="text-align: center; font-size:30px;" onclick="logout()">Logout
     </div>
 
-    <div class="p-3 mb-2 bg-danger text-white" style="text-align: center;">Select the food which is likely to be: </div>
+    <div class="p-3 mb-2 text-white" style="text-align: center; background-color:rgb(23, 90, 43)">Select the food which is likely to be: </div>
     <ul class="list-group mb-2" id="abc">
     </ul>
     <center>
-        <button type="button" onclick="estimateCalo(1)" class="btn btn-outline-success">Yes</button>
-        <button type="button" onclick="estimateCalo(2)" class="btn btn-outline-success">No</button>
-        <ul class="list-group mb-2">
-            <li class="list-group-item"> Please eat less Pizza it contains 300-500 cal </li>
-            <li class="list-group-item"> Burgers contains 500-600 cal </li>
-            <li class="list-group-item"> Eat fruits and exercise Daily </li>
-
-
+        <div class="row container">
+                <div class="mx-auto"><button type="button" style="border-radius: 50%;" onclick="estimateCalo(1)" class="btn btn-success">Yes</button>
+                </div>
+                <div class="mx-auto"><button type="button" style="border-radius: 50%;" onclick="estimateCalo(2)" class="btn btn-danger">No</button>
+                </div>
+        </div>
+        
+        <ul class="list-group my-2">
+            <li class="list-group-item bg-dark text-white"> Avoid processed junk food (eat real food instead) as it contains 300-500 cal </li>
+            <li class="list-group-item "> Use extra virgin olive oil</li>
+            <li class="list-group-item bg-dark text-white"> Eat fruits and exercise Daily </li>
+            <li class="list-group-item"> Drink some water, especially before meals </li>
+            <li class="list-group-item bg-dark text-white"> Track your food intake every now and then </li>
 
         </ul>
     </center>
