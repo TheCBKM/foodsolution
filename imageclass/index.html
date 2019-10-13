@@ -57,10 +57,17 @@
   <script src="../storage.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
   <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
-
+  <script>
+      function logout() {
+          sessionStorage.clear();
+          window.location.href = "../login/dist/index.html"
+      }
+  </script> 
 </head>
 
 <body style="background-image: url(bg.jpg); height: 100%;background-position: center;background-repeat: repeat;">
+    <div class="p-1 mb-2 bg-primary text-white" style="text-align: center; font-size:30px;" onclick="logout()">Logout
+      </div>
   <center>
     <h1 style="font-family:courier new;color:yellow;"><b>Can You Eat IT?</b></h1>
   </center>

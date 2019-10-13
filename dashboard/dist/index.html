@@ -29,9 +29,15 @@ axios.post('https://foodsolutions-versionbeta.herokuapp.com/data/gettoday',{
 .catch(e=>{
   console.log(e)
 })
+function logout(){
+  sessionStorage.clear();
+  window.location.href="../../login/dist/index.html"
+}
 </script>
 </head>
 <body>
+    <div class="p-1 mb-2 bg-primary text-white" style="text-align: center; font-size:30px;" onclick="logout()">Logout</div>
+  <div class="row">
 <!-- partial:index.partial.html -->
 <div class='widget'>
   <header>

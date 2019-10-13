@@ -12,9 +12,18 @@
     <script src="../storage.js"></script>
 
     <title>data</title>
+    <script>
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = "../login/dist/index.html"
+        }
+    </script>
 </head>
 
 <body>
+    <div class="p-1 mb-2 bg-primary text-white" style="text-align: center; font-size:30px;" onclick="logout()">Logout
+    </div>
+
     <div class="p-3 mb-2 bg-danger text-white" style="text-align: center;">Select the food which is likely to be: </div>
     <ul class="list-group mb-2" id="abc">
     </ul>
@@ -2138,7 +2147,7 @@
                 cal: "206 cal"
             }
         ]
-        var str = '',  a = 'a', count = 0;
+        var str = '', a = 'a', count = 0;
         var food = getStorage('food');
         data.map(d => {
             if (d.food.toLowerCase().includes(food)) {
