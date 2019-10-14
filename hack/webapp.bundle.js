@@ -7690,7 +7690,7 @@
 
               log('RAW data (no decoding)...')
               miband.rawStart();
-              await delay(30000);
+              await delay(60000);
               miband.rawStop();
 
               log('Finished.');
