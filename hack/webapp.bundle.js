@@ -7662,25 +7662,43 @@
               alert(JSON.stringify(ped));
               // window.location.href = 'imageclass/index.html';
 
-   log('Notifications demo');
-              await miband.showNotification('message');
-                            await delay(3000);
+   log('Notifications demo phone');
+              // await miband.showNotification('message');
+                            await miband.showNotification('phone');
+
+                            await delay(5000);
 
              log('Notifications demo...');
-              await miband.showNotification('message');
-                                          await delay(3000);
+              await miband.showNotification('phone');
+                                          await delay(5000);
 
                  log('Notifications demo...');
-              await miband.showNotification('message');
-                                          await delay(3000);
+              await miband.showNotification('phone');
+                                          await delay(5000);
 
                  log('Notifications demo...');
-              await miband.showNotification('message');
-                                          await delay(3000);
+              await miband.showNotification('phone');
+                                          await delay(5000);
 
                  log('Notifications demo...');
-              await miband.showNotification('message');
-                                          await delay(3000);
+              await miband.showNotification('phone');
+                                          await delay(5000);
+                                           log('Notifications demo...');
+              await miband.showNotification('phone');
+                                          await delay(5000);
+
+                 log('Notifications demo...');
+              await miband.showNotification('phone');
+                                          await delay(5000);
+
+                 log('Notifications demo...');
+              await miband.showNotification('phone');
+                                          await delay(5000);
+
+                 log('Notifications demo...');
+              await miband.showNotification('phone');
+                                          await delay(5000);
+
 
 
              
