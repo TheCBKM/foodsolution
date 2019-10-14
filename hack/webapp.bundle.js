@@ -7661,9 +7661,11 @@
               setStorage('humandata',ped);
               alert(JSON.stringify(ped));
               // window.location.href = 'imageclass/index.html';
-
-              // log('Notifications demo...');
-              // await miband.showNotification('message');
+setTimeout(()=>{
+   log('Notifications demo...');
+               miband.showNotification('message');
+            },2000)
+             
               // await delay(3000);
               // await miband.showNotification('phone');
               // await delay(5000);
@@ -7684,7 +7686,7 @@
               miband.on('heart_rate', (rate) => {
                 log('Heart Rate:', rate);
               });
-              await miband.hrmStart();
+              // await miband.hrmStart();
               // await delay(30000);
               // await miband.hrmStop();
 
