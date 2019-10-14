@@ -120,6 +120,10 @@
   </center>
   <script>
     let net;
+    console.log('Loading mobilenet..');
+      // Load the model.
+      net = await mobilenet.load();
+      console.log('Successfully loaded model');
     var food;
     var cpd;
     var user = getStorage('user');

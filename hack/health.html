@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Meal Plan</title>
+</head>
+
+<body>
+  <div class="p-1 mb-2 bg-primary text-white" style="text-align: center; font-size:30px;">Meal Plans</div>
+  <div class="row">
+    <div class="card mx-auto" style="width: 18rem;">
+      <img
+        src="data:image/png;base64,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"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <center>
+          <h4 class="card-text">Gain Weight</h4>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Show
+            Tips</button>
+        </center>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Gain Weight</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <br> Don't drink water before meals. This can fill your stomach and make it harder to get in enough
+            calories.
+            <br> Eat more often. Squeeze in an additional meal or snack whenever you can, such as before bed.
+            <br>Drink milk. Drinking whole milk to quench thirst is a simple way to get in more high-quality protein and
+            calories.
+            <br>Try weight gainer shakes. If you’re really struggling then you can try weight gainer shakes. These are
+            very high in protein, carbs and calories.
+            <br>Use bigger plates. Definitely use large plates if you’re trying to get in more calories, as smaller
+            plates cause people to automatically eat less.
+            <br>Add cream to your coffee. This is a simple way to add in more calories.
+            <br>Take creatine. The muscle building supplement creatine monohydrate can help you gain a few pounds in
+            muscle weight.
+            <br>Get quality sleep. Sleeping properly is very important for muscle growth.
+            <br>Eat your protein first and vegetables last. If you have a mix of foods on your plate, eat the
+            calorie-dense and protein-rich foods first. Eat the vegetables last.
+            <br>Don't smoke. Smokers tend to weigh less than non-smokers, and quitting smoking often leads to weight
+            gain. </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mx-auto" style="width: 18rem;">
+      <img
+        src="data:image/jpeg;base64,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"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <center>
+          <h4 class="card-text">Lose Weight</h4>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">Show
+            Tips</button>
+        </center>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Lose Weight</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <br>Eating less: Unless you eat fewer calories than your body uses, you will not lose weight.
+            <br> Physical activity: Any good diet plan will include physical activity. Physical activity burns calories
+            and is one less opportunity to eat during the day. You should exercise for at least 30 minutes, five times a
+            week. Regular exercise also has many other health benefits.
+            <br> Change in habits and attitudes: Most people have enough willpower to lose weight for a few weeks. To
+            lose enough weight to improve your health and keep it off, you will need to change the way you think about
+            food and exercise. As you eat, try to understand some of the hidden reasons you eat.<br>
+            <br> You can learn to spot situations in which you overeat and head off the overeating. You can learn to
+            enjoy eating less and being active.
+            <br> Support: Many people find that enlisting friends, family, and coworkers for support is helpful in
+            losing weight. Others prefer groups such as Weight Watchers or Take Off Pounds Sensibly (TOPS) to keep them
+            motivated. The important thing is to seek the support you need to achieve your goals.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mx-auto" style="width: 18rem;">
+      <img
+        src="data:image/jpeg;base64,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"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <center>
+          <h4 class="card-text">Maintain Healthy Weight</h4>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">Show
+            Tips</button>
+        </center>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Maintain Healthy Weight</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+
+            <br> Limit portion size to control calorie intake.
+            <br> Add healthy snacks during the day if you want to gain weight.
+            <br> Be as physically active as you can be.
+            <br>Talk to your doctor about your weight if you think that you weigh too much or too little.
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
