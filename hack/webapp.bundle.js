@@ -7685,13 +7685,13 @@
                 log('Heart Rate:', rate);
               });
               await miband.hrmStart();
-              await delay(10000);
+              await delay(30000);
               await miband.hrmStop();
 
-              //log('RAW data (no decoding)...')
-              //miband.rawStart();
-              //await delay(30000);
-              //miband.rawStop();
+              log('RAW data (no decoding)...')
+              miband.rawStart();
+              await delay(30000);
+              miband.rawStop();
 
               log('Finished.');
             }
