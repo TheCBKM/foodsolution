@@ -7661,10 +7661,18 @@
               setStorage('humandata',ped);
               alert(JSON.stringify(ped));
               // window.location.href = 'imageclass/index.html';
-setTimeout(()=>{
+
    log('Notifications demo...');
-               miband.showNotification('message');
-            },2000)
+              await miband.showNotification('message');
+             log('Notifications demo...');
+              await miband.showNotification('message');
+                 log('Notifications demo...');
+              await miband.showNotification('message');
+                 log('Notifications demo...');
+              await miband.showNotification('message');
+                 log('Notifications demo...');
+              await miband.showNotification('message');
+                             
              
               // await delay(3000);
               // await miband.showNotification('phone');
