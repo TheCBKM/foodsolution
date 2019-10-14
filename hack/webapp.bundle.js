@@ -7662,17 +7662,27 @@
               alert(JSON.stringify(ped));
               // window.location.href = 'imageclass/index.html';
 
-   log('Notifications demo...');
+   log('Notifications demo');
               await miband.showNotification('message');
+                            await delay(3000);
+
              log('Notifications demo...');
               await miband.showNotification('message');
+                                          await delay(3000);
+
                  log('Notifications demo...');
               await miband.showNotification('message');
+                                          await delay(3000);
+
                  log('Notifications demo...');
               await miband.showNotification('message');
+                                          await delay(3000);
+
                  log('Notifications demo...');
               await miband.showNotification('message');
-                             
+                                          await delay(3000);
+
+
              
               // await delay(3000);
               // await miband.showNotification('phone');
