@@ -12,11 +12,11 @@ Server hosted on [https://foodsolutions-versionbeta.herokuapp.com/available](htt
  - Band will connect `automatically `
 -  Acquire the data `automatically`
 -  After all this process 
--  Upload page will open and Here you can add your Food 
+-  Upload page will open and Here you can add your image 
 -  Select your activity level
 -  Our ML will analyze  the image and compare it with our data-sets
 -  and predict the results 
--  User will choose the food recommended
+-  User will choose the food  
  - Our system will tell user that is this food is safe to eat ,to become healthy 
  ### Daily analysis
  We give Dash board  to user so that user can track its records `graphically`
@@ -25,3 +25,17 @@ Server hosted on [https://foodsolutions-versionbeta.herokuapp.com/available](htt
 - Will add barcode reader
 - Android App 
 - Will provide notification 
+
+## Special thanks
+- [https://github.com/vshymanskyy](https://github.com/vshymanskyy)
+- [https://www.calories.info](https://www.calories.info)
+
+### Creators
+- [Rajaram Joshi](https://github.com/TheCBKM)
+- [Prakhar Mangal](https://github.com/Prakhar-Mangal)
+- [Ram Birla](https://github.com/ram-birla)
+## Screenshots
+![enter image description here](https://lh3.googleusercontent.com/r5qeTwFff04I1Si2Ags-3wVr-c6eO5xmnyifrDFJoH2EoujuHLoY1QWzf6L3j3UHWXUlPy7JKPyIBg)
+![enter image description here](https://lh3.googleusercontent.com/_1NhagLdMJoMoNKncg95LWklA9TeGxRQ6aa53ZbeIcWzooeR60SoMKVMrel5wQXFnbI3vnHjbvFAhA)![enter image description here](https://lh3.googleusercontent.com/iELRoR7C-ehczXLw_IOonvDNA3nG7NU03xW4ScZcIsSs91CUKB7mIzLrSuKlPIhp9Joi9LutNQpSvA)![enter image description here](https://lh3.googleusercontent.com/9P_gwo_9uKxnqaV2aGY0Odu7iADCtuPJy2iuKBvHCn6sYSJwJbV4-JWgu0oG9Cbs5zX50TQhC9iBQA)
+![enter image description here](https://lh3.googleusercontent.com/cru0xCxpqzHgXXe-CTdSPZLUqrMkEB9IHPT6XLZvm9LYjkp72iMe_yKJJZlYNj2wMq5Dy__SkqnVlg)[ ](https://lh3.googleusercontent.com/4pY1zSE2HeGxy-UY45pvBC0HNTNror_zoJnVVsGNRQtXn-KKiaIUtEA9MIkbuwMwtAU2YjSJ3a25Gw)
+![enter image description here](https://lh3.googleusercontent.com/XUuakD5PP9410qE_Qn2UwlQ673smhBl1KCnIBVYULiFrJkVW5r1Y_CBzswFDTx_cnbpkf5SwQDfqGQ)![enter image description here](https://lh3.googleusercontent.com/z-5116hTHjYInWpxQ_4oJjgXlMGujGYoJnKTKGzDl43VYW4-Oxbm5h0bYQPsBIVAhT2xQEUVoiatNw)
