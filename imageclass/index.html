@@ -142,8 +142,10 @@
       // Make a prediction through the model on our image.
       img = document.getElementById('output');
       const result = await net.classify(img);
-      // alert(JSON.stringify(result));
+      alert(JSON.stringify(result));
       // alert('done');
+      // alert(result)
+      console.log(result)
       food = result;
       setStorage('food', food[0].className);
       setStorage('cpd', cpd);
