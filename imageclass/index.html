@@ -119,11 +119,13 @@
     </div>
   </center>
   <script>
+    alert('1');
     let net;
     console.log('Loading mobilenet..');
       // Load the model.
       net = await mobilenet.load();
       console.log('Successfully loaded model');
+    alert('2');
     var food;
     var cpd;
     var user = getStorage('user');
