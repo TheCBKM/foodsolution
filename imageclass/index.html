@@ -122,12 +122,13 @@
     let net;
     console.log('Loading mobilenet..');
       // Load the model.
-      net = await mobilenet.load();
+      net = mobilenet.load(); //removing await
       console.log('Successfully loaded model');
     var food;
     var cpd;
     var user = getStorage('user');
     async function app(x) {
+      // alert ('app call');
       document.getElementById("ml").innerHTML = ' <div class="lds-ring"><div></div><div></div><div></div><div></div></div> '
       document.getElementById("ml1").innerHTML = ""
 
@@ -140,13 +141,15 @@
       img = document.getElementById('output');
       const result = await net.classify(img);
       // alert(JSON.stringify(result));
-      // alert('done');
+      // alert('done')
+      // alert(result)
+      // console.log(result)
       food = result;
       setStorage('food', food[0].className);
       setStorage('cpd', cpd);
       window.location.href = 'data.html';
 
-      //alert(getStorage('food'));
+      // alert(getStorage('food'));
     }
 
   </script>
